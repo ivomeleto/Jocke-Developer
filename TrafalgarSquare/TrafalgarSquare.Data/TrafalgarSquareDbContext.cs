@@ -1,6 +1,7 @@
 ﻿namespace TrafalgarSquare.Data
 {
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
     using Microsoft.AspNet.Identity.EntityFramework;
     using TrafalgarSquare.Data.Migrations;
     using TrafalgarSquare.Models;
@@ -21,6 +22,47 @@
         public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            // Messages
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Messages)
+                .WithRequired(x => x.Sender)
+                .HasForeignKey(x => x.SenderId);
+
+            // User's Posts
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Posts)
+                .WithRequired(x => x.PostOwner)
+                .HasForeignKey(x => x.PostOwnerId);
+
+            modelBuilder.Entity<Post>()
+                .HasOptional(entity => entity.RepliedPost)
+                .WithMany(p => p.RepliedPosts)
+                .HasForeignKey(s => s.RepliedPostId);
+
+            // Reported Posts by user
+            modelBuilder.Entity<User>()
+                .HasMany(m => m.ReportedPosts)
+                .WithRequired(x => x.Reporter)
+                .HasForeignKey(x => x.ReportedUserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Post>()
+                .HasMany(x => x.ReportedUsers)
+                .WithRequired(x => x.Post)
+                .HasForeignKey(x => x.PostId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
