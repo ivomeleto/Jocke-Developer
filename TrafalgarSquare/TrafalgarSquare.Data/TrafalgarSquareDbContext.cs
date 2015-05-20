@@ -14,6 +14,14 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrafalgarSquareDbContext, Configuration>());
         }
 
+        public virtual IDbSet<Notification> Notifications { get; set; }
+
+        public virtual IDbSet<Message> Messages { get; set; }
+
+        public virtual IDbSet<UsersReportedPosts> UsersReportedPosts { get; set; }
+
+        public virtual IDbSet<Post> Posts { get; set; }
+
         public static TrafalgarSquareDbContext Create()
         {
             return new TrafalgarSquareDbContext();

@@ -14,6 +14,14 @@
 
         IGenericRepository<User> Users { get; }
 
+        IGenericRepository<Post> Posts { get; }
+
+        IGenericRepository<UsersReportedPosts> UsersReportedPosts { get; }
+
+        IGenericRepository<Notification> Notifications { get; }
+
+        IGenericRepository<Message> Messages { get; }
+
         int SaveChanges();
     }
 }

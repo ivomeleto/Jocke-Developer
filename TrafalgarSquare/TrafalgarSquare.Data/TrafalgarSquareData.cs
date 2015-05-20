@@ -30,6 +30,27 @@
             get { return this.GetRepository<User>(); }
         }
 
+        public IGenericRepository<Post> Posts
+        {
+            get { return this.GetRepository<Post>(); }
+        }
+
+        public IGenericRepository<UsersReportedPosts> UsersReportedPosts
+        {
+            get { return this.GetRepository<UsersReportedPosts>(); }
+        }
+
+        public IGenericRepository<Notification> Notifications
+        {
+            get { return this.GetRepository<Notification>(); }
+        }
+
+
+        public IGenericRepository<Message> Messages
+        {
+            get { return this.GetRepository<Message>(); }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();
