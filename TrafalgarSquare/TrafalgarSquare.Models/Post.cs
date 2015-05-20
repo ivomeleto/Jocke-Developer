@@ -13,22 +13,21 @@
         private ICollection<User> favouritedUsers;
         private ICollection<Post> repliedPosts;
         private ICollection<UsersReportedPosts> reportedUsers;
+        private ICollection<UsersLikes> likedUsers;
 
         public Post()
         {
             this.favouritedUsers = new HashSet<User>();
             this.repliedPosts = new HashSet<Post>();
             this.reportedUsers = new HashSet<UsersReportedPosts>();
+            this.likedUsers = new HashSet<UsersLikes>();
         }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string Url { get; set; }
-
-        [Required]
-        public string Content { get; set; }
+        public PostContent Content { get; set; }
 
         [Required]
         public DateTime CreatedDateTime { get; set; }
@@ -41,6 +40,12 @@
         {
             get { return this.reportedUsers; }
             set { this.reportedUsers = value; }
+        }
+
+        public virtual ICollection<UsersLikes> LikedUsers
+        {
+            get { return this.likedUsers; }
+            set { this.likedUsers = value; }
         }
 
         public int? RepliedPostId { get; set; }

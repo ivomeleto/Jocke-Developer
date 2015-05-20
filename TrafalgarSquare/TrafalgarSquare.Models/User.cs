@@ -16,6 +16,7 @@
         private ICollection<Notification> notifications;
         private ICollection<Post> posts;
         private ICollection<UsersReportedPosts> reportedPosts;
+        private ICollection<UsersLikes> likedPosts;
 
 
         public User()
@@ -24,6 +25,7 @@
             this.notifications = new HashSet<Notification>();
             this.posts = new HashSet<Post>();
             this.reportedPosts = new HashSet<UsersReportedPosts>();
+            this.likedPosts = new HashSet<UsersLikes>();
         }
 
         public string Name { get; set; }
@@ -46,6 +48,13 @@
         {
             get { return this.reportedPosts; }
             set { this.reportedPosts = value; }
+        }
+
+
+        public virtual ICollection<UsersLikes> LikedPosts
+        {
+            get { return this.likedPosts; }
+            set { this.likedPosts = value; }
         }
 
         public virtual ICollection<Message> Messages

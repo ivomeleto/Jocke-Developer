@@ -66,6 +66,19 @@
                 .HasForeignKey(x => x.PostId)
                 .WillCascadeOnDelete(true);
 
+            // Liked Posts by user
+            modelBuilder.Entity<User>()
+                .HasMany(m => m.LikedPosts)
+                .WithRequired(x => x.LikingUser)
+                .HasForeignKey(x => x.LikingUserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Post>()
+                .HasMany(x => x.LikedUsers)
+                .WithRequired(x => x.LikedPost)
+                .HasForeignKey(x => x.LikedPostId)
+                .WillCascadeOnDelete(true);
+
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
             modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
