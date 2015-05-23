@@ -6,17 +6,17 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class UsersLikes
+    public class UsersPostsLikes
     {
         public int Id { get; set; }
 
-        public string LikingUserId { get; set; }
+        public string UserId { get; set; }
 
-        public virtual User LikingUser { get; set; }
+        public virtual User User { get; set; }
 
-        public int LikedPostId { get; set; }
+        public int PostId { get; set; }
 
-        public virtual Post LikedPost { get; set; }
+        public virtual Post Post { get; set; }
 
         public DateTime LikedDateTime { get; set; }
     }

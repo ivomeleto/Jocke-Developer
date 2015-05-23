@@ -10,17 +10,15 @@
 
     public class Post
     {
-        private ICollection<User> favouritedUsers;
-        private ICollection<Post> repliedPosts;
         private ICollection<UsersReportedPosts> reportedUsers;
-        private ICollection<UsersLikes> likedUsers;
+        private ICollection<UsersPostsLikes> likedUsers;
+        private ICollection<PostsComments> comments;
 
         public Post()
         {
-            this.favouritedUsers = new HashSet<User>();
-            this.repliedPosts = new HashSet<Post>();
             this.reportedUsers = new HashSet<UsersReportedPosts>();
-            this.likedUsers = new HashSet<UsersLikes>();
+            this.likedUsers = new HashSet<UsersPostsLikes>();
+            this.comments = new HashSet<PostsComments>();
         }
 
         [Key]
@@ -48,21 +46,16 @@
             set { this.reportedUsers = value; }
         }
 
-        public virtual ICollection<UsersLikes> LikedUsers
+        public virtual ICollection<UsersPostsLikes> LikedUsers
         {
             get { return this.likedUsers; }
             set { this.likedUsers = value; }
         }
 
-        public int? RepliedPostId { get; set; }
-
-        [ForeignKey("RepliedPostId")]
-        public virtual Post RepliedPost { get; set; }
-
-        public virtual ICollection<Post> RepliedPosts
+        public virtual ICollection<PostsComments> Comments
         {
-            get { return this.repliedPosts; }
-            set { this.repliedPosts = value; }
+            get { return this.comments; }
+            set { this.comments = value; }
         }
 
         public bool? IsReported { get; set; }

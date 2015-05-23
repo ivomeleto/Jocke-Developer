@@ -13,7 +13,7 @@
 
         IDbSet<UsersReportedPosts> UsersReportedPosts { get; set; }
 
-        IDbSet<UsersLikes> UsersLikes { get; set; }
+        IDbSet<UsersPostsLikes> UsersLikes { get; set; }
 
         IDbSet<Post> Posts { get; set; }
 

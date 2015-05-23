@@ -20,7 +20,6 @@
 
         public virtual Post Post { get; set; }
 
-
         [Required]
         public DateTime ReprotedDate { get; set; }
     }

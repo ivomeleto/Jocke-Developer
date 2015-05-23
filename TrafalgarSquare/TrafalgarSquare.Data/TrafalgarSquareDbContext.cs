@@ -22,7 +22,7 @@
 
         public virtual IDbSet<UsersReportedPosts> UsersReportedPosts { get; set; }
 
-        public IDbSet<UsersLikes> UsersLikes { get; set; }
+        public IDbSet<UsersPostsLikes> UsersLikes { get; set; }
 
         public virtual IDbSet<Post> Posts { get; set; }
 
@@ -59,11 +59,6 @@
                 .WithRequired(x => x.PostOwner)
                 .HasForeignKey(x => x.PostOwnerId);
 
-            modelBuilder.Entity<Post>()
-                .HasOptional(entity => entity.RepliedPost)
-                .WithMany(p => p.RepliedPosts)
-                .HasForeignKey(s => s.RepliedPostId);
-
             // Reported Posts by user
             modelBuilder.Entity<User>()
                 .HasMany(m => m.ReportedPosts)
@@ -77,18 +72,32 @@
                 .HasForeignKey(x => x.PostId)
                 .WillCascadeOnDelete(true);
 
+            // Post likes
+            modelBuilder.Entity<Post>()
+                .HasMany(x => x.LikedUsers)
+                .WithRequired(x => x.Post)
+                .HasForeignKey(x => x.PostId)
+                .WillCascadeOnDelete(true);
+
             // Liked Posts by user
             modelBuilder.Entity<User>()
                 .HasMany(m => m.LikedPosts)
-                .WithRequired(x => x.LikingUser)
-                .HasForeignKey(x => x.LikingUserId)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Post>()
-                .HasMany(x => x.LikedUsers)
-                .WithRequired(x => x.LikedPost)
-                .HasForeignKey(x => x.LikedPostId)
-                .WillCascadeOnDelete(true);
+            // User's Comments
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Comments)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
+            // Liked Comments by User
+            modelBuilder.Entity<User>()
+                .HasMany(m => m.LikedComments)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);

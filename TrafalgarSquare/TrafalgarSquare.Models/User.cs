@@ -16,7 +16,9 @@
         private ICollection<Notification> notifications;
         private ICollection<Post> posts;
         private ICollection<UsersReportedPosts> reportedPosts;
-        private ICollection<UsersLikes> likedPosts;
+        private ICollection<UsersPostsLikes> likedPosts;
+        private ICollection<PostsComments> comments;
+        private ICollection<UsersCommentsLikes> likedComments;
         private ICollection<UsersFriends> usersFriends;
 
 
@@ -26,7 +28,9 @@
             this.notifications = new HashSet<Notification>();
             this.posts = new HashSet<Post>();
             this.reportedPosts = new HashSet<UsersReportedPosts>();
-            this.likedPosts = new HashSet<UsersLikes>();
+            this.likedPosts = new HashSet<UsersPostsLikes>();
+            this.comments = new HashSet<PostsComments>();
+            this.likedComments = new HashSet<UsersCommentsLikes>();
             this.usersFriends = new HashSet<UsersFriends>();
         }
 
@@ -53,10 +57,22 @@
         }
 
 
-        public virtual ICollection<UsersLikes> LikedPosts
+        public virtual ICollection<UsersPostsLikes> LikedPosts
         {
             get { return this.likedPosts; }
             set { this.likedPosts = value; }
+        }
+
+        public virtual ICollection<PostsComments> Comments
+        {
+            get { return this.comments; }
+            set { this.comments = value; }
+        }
+
+        public virtual ICollection<UsersCommentsLikes> LikedComments
+        {
+            get { return this.likedComments; }
+            set { this.likedComments = value; }
         }
 
         public virtual ICollection<UsersFriends> Friends
