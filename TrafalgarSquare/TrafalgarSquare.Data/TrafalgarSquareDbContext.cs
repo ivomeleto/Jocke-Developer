@@ -18,9 +18,14 @@
 
         public virtual IDbSet<Message> Messages { get; set; }
 
+        public IDbSet<Category> Categories { get; set; }
+
         public virtual IDbSet<UsersReportedPosts> UsersReportedPosts { get; set; }
 
+        public IDbSet<UsersLikes> UsersLikes { get; set; }
+
         public virtual IDbSet<Post> Posts { get; set; }
+
 
         public static TrafalgarSquareDbContext Create()
         {
@@ -35,6 +40,12 @@
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            // User's Friends
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Friends)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId);
 
             // Messages
             modelBuilder.Entity<User>()

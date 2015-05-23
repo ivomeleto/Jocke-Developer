@@ -26,8 +26,14 @@
         [Key]
         public int Id { get; set; }
 
+        public string Title { get; set; }
+
         [Required]
         public PostContent Content { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
 
         [Required]
         public DateTime CreatedDateTime { get; set; }
