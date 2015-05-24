@@ -4,8 +4,12 @@ namespace TrafalgarSquare.Models
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class Comments
+    public class Comment
     {
+        public Comment()
+        {
+        }
+
         [Key]
         public int Id { get; set; }
 

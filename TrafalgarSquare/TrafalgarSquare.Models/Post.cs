@@ -12,13 +12,13 @@
     {
         private ICollection<ReportedPosts> _usersReportedPosts;
         private ICollection<PostLikes> _likesPost;
-        private ICollection<Comments> comments;
+        private ICollection<Comment> comments;
 
         public Post()
         {
             this._usersReportedPosts = new HashSet<ReportedPosts>();
             this._likesPost = new HashSet<PostLikes>();
-            this.comments = new HashSet<Comments>();
+            this.comments = new HashSet<Comment>();
         }
 
         [Key]
@@ -60,7 +60,7 @@
             set { this._likesPost = value; }
         }
 
-        public virtual ICollection<Comments> Comments
+        public virtual ICollection<Comment> Comments
         {
             get { return this.comments; }
             set { this.comments = value; }

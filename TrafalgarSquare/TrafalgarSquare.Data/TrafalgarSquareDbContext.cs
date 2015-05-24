@@ -20,9 +20,13 @@
 
         public IDbSet<Category> Categories { get; set; }
 
+        public IDbSet<Comment> Comments { get; set; }
+
         public virtual IDbSet<ReportedPosts> UsersReportedPosts { get; set; }
 
         public IDbSet<PostLikes> UsersLikes { get; set; }
+
+        public IDbSet<UserFriends> UsersFriends { get; set; }
 
         public virtual IDbSet<Post> Posts { get; set; }
 

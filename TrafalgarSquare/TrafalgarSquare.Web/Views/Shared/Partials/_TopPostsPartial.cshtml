@@ -1,0 +1,9 @@
+﻿@model IEnumerable<TrafalgarSquare.Web.ViewModels.TopPostViewModel>
+<aside class="col-md-2">
+    <h2>Top 10 Jokes</h2>
+    @Html.DisplayFor(t => t)
+    @if (!Model.Any())
+    {
+        @:<p>No Posts for Rank!</p>
+    }
+</aside>

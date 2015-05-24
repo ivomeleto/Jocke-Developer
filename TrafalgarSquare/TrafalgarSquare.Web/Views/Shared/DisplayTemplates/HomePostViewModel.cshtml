@@ -1,0 +1,21 @@
+﻿@using TrafalgarSquare.Models
+@model TrafalgarSquare.Web.ViewModels.HomePostViewModel
+
+<div class="row">
+    <div class="row">@Model.Category.Name</div>
+    <div class="col-md-2">
+        <div>
+            @*@if (@Model.PostResources.PictureUrl != null)
+            {
+                <img src="@Model.PostResources.PictureUrl" alt="post-pic-@Model.Title"/>
+            }*@
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">Title: @Model.Title</div>
+        <div class="row">posted by: @Model.PostOwner.UserName</div>
+        <div class="row">@string.Format("{0:dd MMM yyyy}", Model.CreatedDateTime)</div>
+        <div class="row">Coments: @Model.CommentsCount</div>
+        <div class="row">Likes: @Model.LikesCount</div>
+    </div>
+</div>

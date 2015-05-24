@@ -1,0 +1,18 @@
+﻿@model TrafalgarSquare.Web.ViewModels.TopPostViewModel
+
+<div class="row">
+    <div class="col-md-2">
+        <div>
+            @*@if (@Model.PostResources.PictureUrl != null)
+            {
+                <img src="@Model.PostResources.PictureUrl" alt="post-pic-@Model.Title" />
+            }*@
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">Title: @Model.Title</div>
+        <div class="row">posted by: @Model.PostOwner.UserName</div>
+        <div class="row">Likes: @Model.LikesCount</div>
+    </div>
+</div>
+<br/>

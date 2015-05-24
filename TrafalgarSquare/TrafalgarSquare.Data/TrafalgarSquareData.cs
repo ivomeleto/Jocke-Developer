@@ -30,14 +30,34 @@
             get { return this.GetRepository<User>(); }
         }
 
+        public IGenericRepository<UserFriends> UsersFriends
+        {
+            get { return this.GetRepository<UserFriends>(); }
+        }
+
         public IGenericRepository<Post> Posts
         {
             get { return this.GetRepository<Post>(); }
         }
 
+        public IGenericRepository<PostLikes> PostsLikes
+        {
+            get { return this.GetRepository<PostLikes>(); }
+        }
+
+        public IGenericRepository<Comment> Comments
+        {
+            get { return this.GetRepository<Comment>(); }
+        }
+
         public IGenericRepository<ReportedPosts> UsersReportedPosts
         {
             get { return this.GetRepository<ReportedPosts>(); }
+        }
+
+        public IGenericRepository<Category> Categories
+        {
+            get { return this.GetRepository<Category>(); }
         }
 
         public IGenericRepository<Notification> Notifications
