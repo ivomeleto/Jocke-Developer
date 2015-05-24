@@ -16,7 +16,7 @@
 
         IGenericRepository<Post> Posts { get; }
 
-        IGenericRepository<UsersReportedPosts> UsersReportedPosts { get; }
+        IGenericRepository<ReportedPosts> UsersReportedPosts { get; }
 
         IGenericRepository<Notification> Notifications { get; }
 

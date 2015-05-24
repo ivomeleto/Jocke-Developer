@@ -20,9 +20,9 @@
 
         public IDbSet<Category> Categories { get; set; }
 
-        public virtual IDbSet<UsersReportedPosts> UsersReportedPosts { get; set; }
+        public virtual IDbSet<ReportedPosts> UsersReportedPosts { get; set; }
 
-        public IDbSet<UsersPostsLikes> UsersLikes { get; set; }
+        public IDbSet<PostLikes> UsersLikes { get; set; }
 
         public virtual IDbSet<Post> Posts { get; set; }
 
@@ -67,14 +67,14 @@
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Post>()
-                .HasMany(x => x.ReportedUsers)
+                .HasMany(x => x.UsersReportedPosts)
                 .WithRequired(x => x.Post)
                 .HasForeignKey(x => x.PostId)
                 .WillCascadeOnDelete(true);
 
             // Post likes
             modelBuilder.Entity<Post>()
-                .HasMany(x => x.LikedUsers)
+                .HasMany(x => x.LikesPost)
                 .WithRequired(x => x.Post)
                 .HasForeignKey(x => x.PostId)
                 .WillCascadeOnDelete(true);
@@ -92,12 +92,12 @@
                 .WithRequired(x => x.User)
                 .HasForeignKey(x => x.UserId);
 
-            // Liked Comments by User
+           /* // Liked Comments by User
             modelBuilder.Entity<User>()
                 .HasMany(m => m.LikedComments)
                 .WithRequired(x => x.User)
                 .HasForeignKey(x => x.UserId)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);

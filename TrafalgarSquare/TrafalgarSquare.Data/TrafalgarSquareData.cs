@@ -35,9 +35,9 @@
             get { return this.GetRepository<Post>(); }
         }
 
-        public IGenericRepository<UsersReportedPosts> UsersReportedPosts
+        public IGenericRepository<ReportedPosts> UsersReportedPosts
         {
-            get { return this.GetRepository<UsersReportedPosts>(); }
+            get { return this.GetRepository<ReportedPosts>(); }
         }
 
         public IGenericRepository<Notification> Notifications

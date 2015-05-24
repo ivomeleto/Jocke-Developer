@@ -10,24 +10,32 @@
 
     public class Post
     {
-        private ICollection<UsersReportedPosts> reportedUsers;
-        private ICollection<UsersPostsLikes> likedUsers;
-        private ICollection<PostsComments> comments;
+        private ICollection<ReportedPosts> _usersReportedPosts;
+        private ICollection<PostLikes> _likesPost;
+        private ICollection<Comments> comments;
 
         public Post()
         {
-            this.reportedUsers = new HashSet<UsersReportedPosts>();
-            this.likedUsers = new HashSet<UsersPostsLikes>();
-            this.comments = new HashSet<PostsComments>();
+            this._usersReportedPosts = new HashSet<ReportedPosts>();
+            this._likesPost = new HashSet<PostLikes>();
+            this.comments = new HashSet<Comments>();
         }
 
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        [MinLength(1)]
+        [MaxLength(100)]
         public string Title { get; set; }
 
         [Required]
-        public PostContent Content { get; set; }
+        [MinLength(1)]
+        [MaxLength(1000)]
+        public string Text { get; set; }
+
+        [Required]
+        public PostResources Resource { get; set; }
 
         public int CategoryId { get; set; }
 
@@ -40,19 +48,19 @@
 
         public virtual User PostOwner { get; set; }
 
-        public virtual ICollection<UsersReportedPosts> ReportedUsers
+        public virtual ICollection<ReportedPosts> UsersReportedPosts
         {
-            get { return this.reportedUsers; }
-            set { this.reportedUsers = value; }
+            get { return this._usersReportedPosts; }
+            set { this._usersReportedPosts = value; }
         }
 
-        public virtual ICollection<UsersPostsLikes> LikedUsers
+        public virtual ICollection<PostLikes> LikesPost
         {
-            get { return this.likedUsers; }
-            set { this.likedUsers = value; }
+            get { return this._likesPost; }
+            set { this._likesPost = value; }
         }
 
-        public virtual ICollection<PostsComments> Comments
+        public virtual ICollection<Comments> Comments
         {
             get { return this.comments; }
             set { this.comments = value; }

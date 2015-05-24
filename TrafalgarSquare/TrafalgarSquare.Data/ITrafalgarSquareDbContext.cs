@@ -11,9 +11,9 @@
 
         IDbSet<Category> Categories { get; set; }
 
-        IDbSet<UsersReportedPosts> UsersReportedPosts { get; set; }
+        IDbSet<ReportedPosts> UsersReportedPosts { get; set; }
 
-        IDbSet<UsersPostsLikes> UsersLikes { get; set; }
+        IDbSet<PostLikes> UsersLikes { get; set; }
 
         IDbSet<Post> Posts { get; set; }
 

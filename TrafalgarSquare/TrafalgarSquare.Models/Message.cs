@@ -10,11 +10,15 @@
         public int Id { get; set; }
 
         [Required]
+        [MinLength(1)]
+        [MaxLength(1000)]
         public string Text { get; set; }
 
         [Required]
         [ForeignKey("Sender")]
         public string SenderId { get; set; }
+
+        public DateTime SendDateTime { get; set; }
 
         public virtual User Sender { get; set; }
 
@@ -23,6 +27,6 @@
 
         public virtual User Recepient { get; set; }
 
-        public DateTime SendDateTime { get; set; }
+
     }
 }

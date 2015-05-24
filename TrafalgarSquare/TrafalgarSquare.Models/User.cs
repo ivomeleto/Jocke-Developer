@@ -15,11 +15,10 @@
         private ICollection<Message> messages;
         private ICollection<Notification> notifications;
         private ICollection<Post> posts;
-        private ICollection<UsersReportedPosts> reportedPosts;
-        private ICollection<UsersPostsLikes> likedPosts;
-        private ICollection<PostsComments> comments;
-        private ICollection<UsersCommentsLikes> likedComments;
-        private ICollection<UsersFriends> usersFriends;
+        private ICollection<ReportedPosts> reportedPosts;
+        private ICollection<PostLikes> likedPosts;
+        private ICollection<Comments> comments;
+        private ICollection<UserFriends> usersFriends;
 
 
         public User()
@@ -27,11 +26,10 @@
             this.messages = new HashSet<Message>();
             this.notifications = new HashSet<Notification>();
             this.posts = new HashSet<Post>();
-            this.reportedPosts = new HashSet<UsersReportedPosts>();
-            this.likedPosts = new HashSet<UsersPostsLikes>();
-            this.comments = new HashSet<PostsComments>();
-            this.likedComments = new HashSet<UsersCommentsLikes>();
-            this.usersFriends = new HashSet<UsersFriends>();
+            this.reportedPosts = new HashSet<ReportedPosts>();
+            this.likedPosts = new HashSet<PostLikes>();
+            this.comments = new HashSet<Comments>();
+            this.usersFriends = new HashSet<UserFriends>();
         }
 
         public string Name { get; set; }
@@ -50,32 +48,26 @@
             set { this.posts = value; }
         }
 
-        public virtual ICollection<UsersReportedPosts> ReportedPosts
+        public virtual ICollection<ReportedPosts> ReportedPosts
         {
             get { return this.reportedPosts; }
             set { this.reportedPosts = value; }
         }
 
 
-        public virtual ICollection<UsersPostsLikes> LikedPosts
+        public virtual ICollection<PostLikes> LikedPosts
         {
             get { return this.likedPosts; }
             set { this.likedPosts = value; }
         }
 
-        public virtual ICollection<PostsComments> Comments
+        public virtual ICollection<Comments> Comments
         {
             get { return this.comments; }
             set { this.comments = value; }
         }
 
-        public virtual ICollection<UsersCommentsLikes> LikedComments
-        {
-            get { return this.likedComments; }
-            set { this.likedComments = value; }
-        }
-
-        public virtual ICollection<UsersFriends> Friends
+        public virtual ICollection<UserFriends> Friends
         {
             get { return this.usersFriends; }
             set { this.usersFriends = value; }

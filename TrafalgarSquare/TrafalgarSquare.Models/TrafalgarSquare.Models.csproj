@@ -57,18 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
-    <Compile Include="PostsComments.cs" />
+    <Compile Include="Comments.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Post.cs" />
-    <Compile Include="PostContent.cs" />
+    <Compile Include="PostResources.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsersFriends.cs" />
-    <Compile Include="UsersCommentsLikes.cs" />
-    <Compile Include="UsersPostsLikes.cs" />
-    <Compile Include="UsersReportedPosts.cs" />
+    <Compile Include="UserFriends.cs" />
+    <Compile Include="PostLikes.cs" />
+    <Compile Include="ReportedPosts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
