@@ -33,6 +33,7 @@
                     })
                 .Select(x => new HomePostViewModel()
                 {
+                    Id = x.post.Id,
                     Title = x.post.Title,
                     PostResources = x.post.Resource,
                     CreatedDateTime = x.post.CreatedDateTime,

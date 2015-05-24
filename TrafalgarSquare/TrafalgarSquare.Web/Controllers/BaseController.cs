@@ -47,6 +47,7 @@
                 .Take(showNumber)
                 .Select(x => new TopPostViewModel()
                 {
+                    Id = x.post.Id,
                     Title = x.post.Title,
                     PostResources = x.post.Resource,
                     PostOwnerId = x.post.PostOwnerId,
