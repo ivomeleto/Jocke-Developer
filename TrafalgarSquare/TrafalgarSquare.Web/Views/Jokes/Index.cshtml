@@ -1,5 +1,45 @@
-﻿@{
-    ViewBag.Title = "Jockes Categorie";
+﻿@using TrafalgarSquare.Web.ViewModels;
+@model List<JokesViewModel>
+@{
+    ViewBag.Title = "Jokes";
 }
 
-<h2>Jockes Categorie</h2>
+<h2>Jokes</h2>
+
+@foreach (var joke in Model)
+{
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="panel-title">@joke.Title<a href="#panel-title" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+        </div>
+        <div class="panel-body">
+            <div class="text-center">
+                <h4>@joke.Text</h4>
+                @if (!string.IsNullOrEmpty(joke.Resource.FileUrl))
+                {
+                    <span>Attached file: </span>
+                    <a href="@joke.Resource.FileUrl">download</a>
+                }
+                @if (!string.IsNullOrEmpty(joke.Resource.PictureUrl))
+                {
+                    <img src="@joke.Resource.PictureUrl" alt="@joke.Title"/>
+                }
+                @if (!string.IsNullOrEmpty(joke.Resource.VideoUrl))
+                {
+                    <video controls>
+                        <source src="@joke.Resource.VideoUrl" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div>Date: @joke.CreatedDateTime </div>
+            <div>User: @joke.Username</div>
+            <div>Likes: @joke.Likes</div>
+            <div>Comments: @joke.CommentsCount</div>
+            <div>@*Is reported: @joke.IsReported*@</div>
+        </div>
+    </div>
+}
