@@ -5,12 +5,19 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using TrafalgarSquare.Data;
 
-    public class MessagesController : Controller
+    public class MessagesController : BaseController
     {
+        public MessagesController(ITrafalgarSquareData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
             return this.View();
         }
+
     }
 }

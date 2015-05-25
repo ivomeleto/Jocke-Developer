@@ -211,6 +211,7 @@
     <Compile Include="Automapper\IMapFrom.cs" />
     <Compile Include="Automapper\MapInitializer.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Hubs\Chat.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -313,6 +314,9 @@
     <Content Include="Views\Shared\DisplayTemplates\TopPostViewModel.cshtml" />
     <Content Include="Views\Shared\Partials\_TopPostsPartial.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\AddFriend.cshtml" />
+    <Content Include="Views\Users\AcceptFriendRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
