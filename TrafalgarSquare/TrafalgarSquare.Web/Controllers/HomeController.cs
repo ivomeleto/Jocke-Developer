@@ -1,12 +1,9 @@
 ﻿namespace TrafalgarSquare.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
-    using TrafalgarSquare.Data;
-    using TrafalgarSquare.Web.ViewModels;
+    using Data;
+    using ViewModels;
 
     public class HomeController : BaseController
     {
@@ -18,10 +15,10 @@
         public ActionResult Index()
         {
             // Takes latest Post for each category
-            var latestPostByCategory = this.Data.Posts.All()
-                .GroupBy(x => x.CategoryId)
-                .Select(z => z.OrderByDescending(x => x.CreatedDateTime))
-                .SelectMany(x => x.Take(1))
+            var latestPostByCategory = Data.Posts.All()
+                .GroupBy(post => post.CategoryId)
+                .Select(posts => posts.OrderByDescending(x => x.CreatedDateTime))
+                .SelectMany(posts => posts.Take(1))
                 .GroupJoin(
                     Data.Comments.All(),
                     x => x.Id,
@@ -49,7 +46,7 @@
             var model = new HomeViewModel()
             {
                 LatestPostsByCategory = latestPostByCategory,
-                TopJokes = this.TopJokes(10)
+                TopJokes = TopJokes(10)
             };
 
             return this.View(model);
