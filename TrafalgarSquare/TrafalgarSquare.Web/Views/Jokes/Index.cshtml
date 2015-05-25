@@ -10,7 +10,8 @@
 {
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" id="panel-title">@joke.Title<a href="#panel-title" class="anchorjs-link"><span class="anchorjs-icon"></span></a>
+            <h3 class="panel-title" id="panel-title">
+                @joke.Title<a href="#panel-title" class="anchorjs-link"><span class="anchorjs-icon"></span></a>
             </h3>
         </div>
         <div class="panel-body">
@@ -23,7 +24,7 @@
                 }
                 @if (!string.IsNullOrEmpty(joke.Resource.PictureUrl))
                 {
-                    <img src="@joke.Resource.PictureUrl" alt="@joke.Title" style="max-width:100%"/>
+                    <img src="@joke.Resource.PictureUrl" alt="@joke.Title" style="max-width:100%" />
                 }
                 @if (!string.IsNullOrEmpty(joke.Resource.VideoUrl))
                 {
@@ -49,8 +50,13 @@
                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                         Like
                     </div>
-                    <div class="btn btn-sm btn-info">Show comments</div>
-                    <div class="btn btn-sm btn-danger">Report post</div>
+                    <div class="btn btn-sm btn-info">
+                        Show comments
+                    </div>
+                    <div class="btn btn-sm btn-danger">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        Report post
+                    </div>
                 </div>
             </div>
         </div>
