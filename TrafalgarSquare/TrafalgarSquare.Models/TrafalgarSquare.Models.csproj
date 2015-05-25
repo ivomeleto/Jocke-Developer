@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
-    <Compile Include="Comment.cs" />
+    <Compile Include="Comments.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Notification.cs" />
