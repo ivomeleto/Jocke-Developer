@@ -2,12 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using TrafalgarSquare.Data.Repositories;
-    using TrafalgarSquare.Data.Repositories.Contracts;
-    using TrafalgarSquare.Models;
+    using Models;
+    using Repositories;
+    using Repositories.Contracts;
 
     public class TrafalgarSquareData : ITrafalgarSquareData
     {

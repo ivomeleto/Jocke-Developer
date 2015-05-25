@@ -1,13 +1,10 @@
 ﻿namespace TrafalgarSquare.Web.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
-    using TrafalgarSquare.Data;
-    using TrafalgarSquare.Models;
-    using TrafalgarSquare.Web.ViewModels;
+    using Data;
+    using ViewModels;
 
     public abstract class BaseController : Controller
     {
@@ -32,9 +29,9 @@
         protected IEnumerable<TopPostViewModel> TopJokes(int showNumber)
         {
             // GrouJoin prevents from changing order unlike groupBy
-            var topJokes = this.Data.Posts.All()
+            var topJokes = Data.Posts.All()
                 .GroupJoin(
-                   this.Data.PostsLikes.All(),
+                   Data.PostsLikes.All(),
                     x => x.Id,
                     postLikes => postLikes.PostId,
                     (post, postLikes) => new

@@ -207,7 +207,7 @@
     <Compile Include="Controllers\FunnyCodesController.cs" />
     <Compile Include="Controllers\FunnyPicturesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JockesController.cs" />
+    <Compile Include="Controllers\JokesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TrainersQuotesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -293,7 +293,7 @@
     <Content Include="Views\Categories\index.cshtml" />
     <Content Include="Views\FunnyPictures\Index.cshtml" />
     <Content Include="Views\FunnyCodes\Index.cshtml" />
-    <Content Include="Views\Jockes\Index.cshtml" />
+    <Content Include="Views\Jokes\Index.cshtml" />
     <Content Include="Views\TrainersQuotes\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\HomePostViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TopPostViewModel.cshtml" />
@@ -310,10 +310,6 @@
     <ProjectReference Include="..\TrafalgarSquare.Data\TrafalgarSquare.Data.csproj">
       <Project>{32d5c29d-70c0-4693-969d-0b6b1c9d90dc}</Project>
       <Name>TrafalgarSquare.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrafalgarSquare.Models\TrafalgarSquare.Models.csproj">
-      <Project>{585b9ecb-15e0-4db0-b9bf-81368fa14086}</Project>
-      <Name>TrafalgarSquare.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

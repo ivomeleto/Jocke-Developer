@@ -9,7 +9,6 @@
     {
         public static void Initialize()
         {
-
             var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).ToList();
             LoadStandardMappings(types);
             LoadCustomMappings(types);
@@ -48,6 +47,5 @@
                 Mapper.CreateMap(map.Source, map.Destination);
             }
         }
-
     }
 }
