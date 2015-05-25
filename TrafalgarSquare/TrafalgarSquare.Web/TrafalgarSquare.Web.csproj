@@ -213,7 +213,8 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
+    <Compile Include="ViewModels\User\UserViewModel.cs" />
     <Compile Include="Hubs\Chat.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />

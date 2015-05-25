@@ -12,7 +12,7 @@
 
         public string PostOwnerId { get; set; }
 
-        public virtual User PostOwner { get; set; }
+        public virtual Models.User PostOwner { get; set; }
 
         public int LikesCount { get; set; }
     }

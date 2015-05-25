@@ -8,6 +8,8 @@
     using Data;
     using Microsoft.AspNet.Identity;
     using TrafalgarSquare.Models;
+    using TrafalgarSquare.Web.ViewModels;
+    using TrafalgarSquare.Web.ViewModels.User;
 
     public class UsersController : BaseController
     {
@@ -16,9 +18,36 @@
         {
         }
 
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult Index(string username)
         {
-            return this.View();
+            var userId = User.Identity.GetUserId();
+            var user = this.Data.Users
+              .All()
+              .Where(x => x.UserName == username)
+              .Select(x => new UserProfileViewModel()
+              {
+                  Id = x.Id,
+                  AvatarUrl = x.AvatarUrl,
+                  Username = x.UserName,
+                  Email = x.Email,
+                  Birthday = x.Birthday,
+                  City = x.City,
+                  Gender = x.Gender.ToString(),
+                  Name = x.Name,
+                  RegisterDate = x.RegisterDate,
+                  PostCount = x.Posts.Count(),
+                  CommentsCount = x.Comments.Count(),
+                  IsOwned = userId == x.Id
+              })
+              .FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new Exception("No user with such username.");
+            }
+
+            return this.View(user);
         }
 
 

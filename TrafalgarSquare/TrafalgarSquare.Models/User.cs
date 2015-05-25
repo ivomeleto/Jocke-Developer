@@ -30,6 +30,7 @@
             this.likedPosts = new HashSet<PostLikes>();
             this.comments = new HashSet<Comment>();
             this.usersFriends = new HashSet<UserFriends>();
+            this.RegisterDate = DateTime.Now;
         }
 
         public string Name { get; set; }
@@ -40,7 +41,9 @@
 
         public Gender? Gender { get; set; }
 
-        public string Adress { get; set; }
+        public string City { get; set; }
+
+        public DateTime RegisterDate { get; private set; }
 
         public virtual ICollection<Post> Posts
         {

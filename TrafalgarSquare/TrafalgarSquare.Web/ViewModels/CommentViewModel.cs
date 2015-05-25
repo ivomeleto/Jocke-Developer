@@ -1,9 +1,12 @@
-﻿namespace TrafalgarSquare.Web.ViewModels
+﻿
+
+namespace TrafalgarSquare.Web.ViewModels
 {
     using System;
     using Automapper;
     using Controllers;
     using Models;
+    using User;
 
     public class CommentViewModel : IMapFrom<Comment>
     {

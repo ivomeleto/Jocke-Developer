@@ -5,6 +5,7 @@
     using System.Web.UI.WebControls;
     using Data;
     using ViewModels;
+    using ViewModels.User;
 
     public class CommentsController : BaseController
     {
@@ -34,7 +35,7 @@
                 })
                 .ToList();
 
-            return View(comments);
+            return this.View(comments);
         }
     }
 }

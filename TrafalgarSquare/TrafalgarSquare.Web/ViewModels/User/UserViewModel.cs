@@ -1,4 +1,4 @@
-﻿namespace TrafalgarSquare.Web.ViewModels
+﻿namespace TrafalgarSquare.Web.ViewModels.User
 {
     using Automapper;
     using Models;

@@ -1,10 +1,12 @@
-﻿namespace TrafalgarSquare.Web.Controllers
+﻿
+namespace TrafalgarSquare.Web.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
     using Data;
     using ViewModels;
+    using ViewModels.User;
 
     public class JokesController : BaseController
     {
@@ -33,10 +35,8 @@
                     }
                 })
                 .ToList();
-            return View(posts);
+            return this.View(posts);
         }
-
-        
 
         public JokesController(ITrafalgarSquareData data) : base(data)
         {

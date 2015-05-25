@@ -1,7 +1,10 @@
-﻿namespace TrafalgarSquare.Web.ViewModels
+﻿
+
+namespace TrafalgarSquare.Web.ViewModels
 {
     using System;
     using Models;
+    using User;
 
     public class JokesViewModel
     {

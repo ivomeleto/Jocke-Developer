@@ -43,7 +43,7 @@ namespace TrafalgarSquare.Data.Migrations
 
                 context.Categories.Add(new Category()
                 {
-                    Name = "Jockes"
+                    Name = "Jokes"
                 });
 
                 context.Categories.Add(new Category()
@@ -65,6 +65,8 @@ namespace TrafalgarSquare.Data.Migrations
                     SecurityStamp = "c05cdbb3-bdf0-49cd-9100-b7b98dff60ee",
                     UserName = "Icakis",
                     Email = "Icakis_87@abv.bg",
+                    Gender = Gender.Male,
+                    Birthday = new DateTime(1987, 6, 16)
                 };
 
                 var adminRole = context.Roles.FirstOrDefault(x => x.Name == "Administrator");
