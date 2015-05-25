@@ -38,9 +38,14 @@
         </div>
         <div class="panel-footer">
             <div class="row">
-                <div class="col-md-5">
+                @if (!string.IsNullOrEmpty(joke.User.AvatarUrl)) {
+                    <div class="col-md-2">
+                        <img src="@joke.User.AvatarUrl" alt="@joke.User.Username"/>
+                    </div>
+                }
+                <div class="col-md-3">
                     <div>Date: @joke.CreatedDateTime </div>
-                    <div>User: @joke.Username</div>
+                    <div>User: @joke.User.Username</div>
                     <div>Likes: @joke.Likes</div>
                     <div>Comments: @joke.CommentsCount</div>
                     <div>@*Is reported: @joke.IsReported*@</div>

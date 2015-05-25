@@ -14,8 +14,24 @@
             var posts = Data.Posts.All()
                 .Where(p => p.Category.Name.Equals("Jockes"))
                 .OrderByDescending(p => p.CreatedDateTime)
-                .ThenBy(post => post.LikesPost.Count())
-                .Select(post => Mapper.Map<JokesViewModel>(post))
+                .ThenBy(p => p.LikesPost.Count())
+                .Select(p => new JokesViewModel
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Text = p.Text,
+                    Resource = p.Resource,
+                    CreatedDateTime = p.CreatedDateTime,
+                    IsReported = p.IsReported ?? false,
+                    Likes = p.LikesPost.Count(),
+                    CommentsCount = p.Comments.Count(),
+                    User = new UserViewModel
+                    {
+                        Id = p.PostOwnerId,
+                        Username = p.PostOwner.UserName,
+                        AvatarUrl = p.PostOwner.AvatarUrl
+                    }
+                })
                 .ToList();
             return View(posts);
         }
@@ -27,7 +43,20 @@
             var comments = Data.Comments.All()
                 .Where(c => c.PostId == postId)
                 .OrderByDescending(c => c.CreatedOn)
-                .Select(c => Mapper.Map<CommentViewModel>(c));
+                .Select(c => new CommentViewModel
+                {
+                    Id = c.Id,
+                    CreatedOn = c.CreatedOn,
+                    Text = c.Text,
+                    User = new UserViewModel
+                    {
+                        Id = c.UserId,
+                        Username = c.User.UserName,
+                        AvatarUrl = c.User.AvatarUrl
+                    }
+                })
+                .ToList();
+
             return View(comments);
         }
 
