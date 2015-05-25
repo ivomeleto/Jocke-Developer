@@ -29,9 +29,9 @@
         protected IEnumerable<TopPostViewModel> TopJokes(int showNumber)
         {
             // GrouJoin prevents from changing order unlike groupBy
-            var topJokes = Data.Posts.All()
+            var topJokes = this.Data.Posts.All()
                 .GroupJoin(
-                   Data.PostsLikes.All(),
+                   this.Data.PostsLikes.All(),
                     x => x.Id,
                     postLikes => postLikes.PostId,
                     (post, postLikes) => new

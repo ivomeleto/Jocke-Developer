@@ -5,7 +5,7 @@
     using Controllers;
     using Models;
 
-    public class CommentViewModel:IMapFrom<Comment>
+    public class CommentViewModel : IMapFrom<Comment>
     {
 
         public int Id { get; set; }

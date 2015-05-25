@@ -6,9 +6,8 @@
     using Data;
     using ViewModels;
 
-    public class CommentsController:BaseController
+    public class CommentsController : BaseController
     {
-
         public CommentsController(ITrafalgarSquareData data)
             : base(data)
         {
