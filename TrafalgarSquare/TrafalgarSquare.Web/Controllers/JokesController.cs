@@ -36,29 +36,7 @@
             return View(posts);
         }
 
-        [HttpGet]
-        [Route("jokes/comments/{postId}")]
-        public ActionResult Comments(int postId)
-        {
-            var comments = Data.Comments.All()
-                .Where(c => c.PostId == postId)
-                .OrderByDescending(c => c.CreatedOn)
-                .Select(c => new CommentViewModel
-                {
-                    Id = c.Id,
-                    CreatedOn = c.CreatedOn,
-                    Text = c.Text,
-                    User = new UserViewModel
-                    {
-                        Id = c.UserId,
-                        Username = c.User.UserName,
-                        AvatarUrl = c.User.AvatarUrl
-                    }
-                })
-                .ToList();
-
-            return View(comments);
-        }
+        
 
         public JokesController(ITrafalgarSquareData data) : base(data)
         {

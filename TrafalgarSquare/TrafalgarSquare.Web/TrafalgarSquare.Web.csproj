@@ -210,6 +210,7 @@
     <Compile Include="Automapper\IHaveCustomMappings.cs" />
     <Compile Include="Automapper\IMapFrom.cs" />
     <Compile Include="Automapper\MapInitializer.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -319,7 +320,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\AddFriend.cshtml" />
     <Content Include="Views\Users\AcceptFriendRequest.cshtml" />
-    <Content Include="Views\Jokes\Comments.cshtml" />
+    <Content Include="Views\Comments\Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
