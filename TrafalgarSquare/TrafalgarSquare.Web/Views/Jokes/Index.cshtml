@@ -65,12 +65,19 @@
                         <div class="btn btn-sm btn-danger">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Report post
+
                         </div>
                     </div>
-                </div>
 
-                <div class="row comments-container-@joke.Id" style="display: none">
-                    <div class="comments-container"></div>
+                    <div class="comments-container-@joke.Id col-xs-12" style="display: none">
+                        <div class="comments-container"></div>
+                        <form class="add-comment-form">
+                            <textarea class="form-control" name="text"></textarea>
+                            <input type="hidden" value="@joke.Id" name="postId"/>
+
+                            <button class="btn btn-info btn-small submit-comment">Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,8 +87,8 @@
 @section scripts{
     <script>
         function loadComments(itemId) {
-            $.get("comments/" + itemId,
-                function(data) {
+            $.get("comments/" + itemId)
+                .done(function(data) {
                     $(".comments-container-" + itemId + " .comments-container").html(data);
                     $(".comments-container-" + itemId).slideDown("fast");
                 });
@@ -104,6 +111,19 @@
                 postControls.children(".show-comments-btn").show();
             }
         });
+
+        $(".add-comment-form").on("submit",
+            function (ev) {
+            ev.preventDefault();
+
+            var itemId = $(ev.target).data("item-id");
+            var formData = $(this).serialize();
+
+                $.post("comments/add/", formData)
+                    .done(function() {
+                        loadComments(itemId);
+                    });
+            });
     </script>
 
 }
