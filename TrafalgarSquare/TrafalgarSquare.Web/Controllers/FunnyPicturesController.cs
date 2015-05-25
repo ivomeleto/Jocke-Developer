@@ -17,7 +17,12 @@ namespace TrafalgarSquare.Web.Controllers
         // GET: FunnyPictures
         public ActionResult Index()
         {
-            return View("FunnyPicturesView");
-        }   
+           
+            return View();
+        }
+
+      
+
+        
     }
 }

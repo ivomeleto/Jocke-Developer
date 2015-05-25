@@ -12,7 +12,7 @@ namespace TrafalgarSquare.Web.Controllers
         // GET: FunnyCodes
         public ActionResult Index()
         {
-            return View("FunnyCodesView");
+            return View();
         }
 
         public FunnyCodesController(ITrafalgarSquareData data) : base(data)

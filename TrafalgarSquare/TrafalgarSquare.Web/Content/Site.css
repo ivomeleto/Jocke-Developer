@@ -23,14 +23,6 @@ textarea {
     max-width: 280px;
 }
 
-.footer {
-  position: relative;
-  margin-top: -150px; /* negative value of footer height */
-  height: 150px;
-  clear:both;
-    text-align: center;
-} 
-
 .wrapper {
   margin-left: 3em;
   margin-right: 3em;
@@ -47,20 +39,4 @@ textarea {
 	float: right;
 	width: 80%;
 	padding: 1em 1em 7em 3em;
-}
-
-.post-box, .nav-pills {
-    text-align: center;
-}
-
-.post-box img {
-    max-width: 80%;
-}
-
-#author-post {
-    max-width: 40%;
-}
-
-#comment-box {
-    max-width: 65%;
 }

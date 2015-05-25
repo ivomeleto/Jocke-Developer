@@ -12,7 +12,7 @@ namespace TrafalgarSquare.Web.Controllers
         // GET: Jockes
         public ActionResult Index()
         {
-            return View("JockesView");
+            return View();
         }
 
         public JockesController(ITrafalgarSquareData data) : base(data)
