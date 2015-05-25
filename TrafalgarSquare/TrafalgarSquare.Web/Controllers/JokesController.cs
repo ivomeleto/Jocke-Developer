@@ -7,7 +7,7 @@ using TrafalgarSquare.Data;
 
 namespace TrafalgarSquare.Web.Controllers
 {
-    public class JockesController : BaseController
+    public class JokesController : BaseController
     {
         // GET: Jockes
         public ActionResult Index()
@@ -15,7 +15,7 @@ namespace TrafalgarSquare.Web.Controllers
             return View();
         }
 
-        public JockesController(ITrafalgarSquareData data) : base(data)
+        public JokesController(ITrafalgarSquareData data) : base(data)
         {
         }
     }
