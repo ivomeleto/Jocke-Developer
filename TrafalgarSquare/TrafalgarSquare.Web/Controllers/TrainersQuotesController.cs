@@ -12,7 +12,7 @@ namespace TrafalgarSquare.Web.Controllers
         // GET: TrainersQuotes
         public ActionResult Index()
         {
-            return View();
+            return View("TrainersQuotesView");
         }
 
         public TrainersQuotesController(ITrafalgarSquareData data) : base(data)
