@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Web.Mvc;
+    using AutoMapper;
     using Data;
     using ViewModels;
 
@@ -13,20 +14,8 @@
             var posts = Data.Posts.All()
                 .Where(p => p.Category.Name.Equals("Jockes"))
                 .OrderByDescending(p => p.CreatedDateTime)
-                .ThenBy(p => p.LikesPost.Count())
-                .Select(p => new JokesViewModel
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                    Text = p.Text,
-                    Resource = p.Resource,
-                    CreatedDateTime = p.CreatedDateTime,
-                    IsReported = p.IsReported ?? false,
-                    Likes = p.LikesPost.Count(),
-                    Username = p.PostOwner.UserName,
-                    UserId = p.PostOwnerId,
-                    CommentsCount = p.Comments.Count()
-                })
+                .ThenBy(post => post.LikesPost.Count())
+                .Select(post => Mapper.Map<JokesViewModel>(post))
                 .ToList();
             return View(posts);
         }
@@ -38,18 +27,7 @@
             var comments = Data.Comments.All()
                 .Where(c => c.PostId == postId)
                 .OrderByDescending(c => c.CreatedOn)
-                .Select(c => new CommentViewModel
-                {
-                    Id = c.Id,
-                    Text = c.Text,
-                    CreatedOn = c.CreatedOn,
-                    User = new UserViewModel
-                    {
-                        Id = c.UserId,
-                        Username = c.User.UserName,
-                        AvatarUrl = c.User.AvatarUrl
-                    }
-                });
+                .Select(c => Mapper.Map<CommentViewModel>(c));
             return View(comments);
         }
 
