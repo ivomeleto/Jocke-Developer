@@ -34,7 +34,7 @@
                                 <a href="#">@Html.ActionLink("Trainers Quotes", "Index", "TrainersQuotes")</a>
                             </li>
                             <li>
-                                <a href="#">@Html.ActionLink("Jockes", "Index", "Jokes")</a>
+                                <a href="#">@Html.ActionLink("Jokes", "Index", "Jokes")</a>
                             </li>
                             <li>
                                 <a href="#">@Html.ActionLink("Funny Codes", "Index", "FunnyCodes")</a>
@@ -51,8 +51,8 @@
             </div>
         </div>
     </nav>
-    <div class="wrapper">
-        <div class="left-wrapper">
+    <div class="container margin-30">
+        <div class="col-sm-3">
             <h3>TOP 10 POSTs</h3>
             <ul class="list-group">
                 <li class="list-group-item">
@@ -78,7 +78,7 @@
             <a href="#" class="btn btn-default btn-lg btn-block">Block level button</a>
         </div>
 
-        <div class="right-wrapper">
+        <div class="col-sm-9">
             @RenderBody()
         </div>
 
@@ -105,7 +105,7 @@
                         <button type="submit" class="btn btn-default">Search</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <li> @DateTime.Now.Year - @Html.ActionLink("Jocke Developer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li> @DateTime.Now.Year - @Html.ActionLink("Joke Developer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
                     </ul>
                 </div>
             </div>
