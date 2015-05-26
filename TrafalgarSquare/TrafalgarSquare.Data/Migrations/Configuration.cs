@@ -201,6 +201,27 @@ namespace TrafalgarSquare.Data.Migrations
                     LikedDateTime = DateTime.Now.AddSeconds(123)
                 });
 
+                // Add Friend
+                secondUser.Friends.Add(new UserFriends()
+                {
+                    UserId = secondUser.Id,
+                    User = secondUser,
+                    FriendId = firstUser.Id,
+                    Friend = firstUser,
+                    SentFriendRequestDate = DateTime.Now,
+                    IsAccepted = true
+                });
+
+                // User 1 Accept Friendship
+                firstUser.Friends.Add(new UserFriends()
+                {
+                    UserId = firstUser.Id,
+                    User = firstUser,
+                    FriendId = secondUser.Id,
+                    Friend = secondUser,
+                    SentFriendRequestDate = DateTime.Now,
+                    IsAccepted = true
+                });
 
                 // -------------------------------- Third User -----------------------------------------
                 var thirdUser = new User()

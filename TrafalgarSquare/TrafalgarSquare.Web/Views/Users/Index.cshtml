@@ -1,6 +1,7 @@
 ﻿@model TrafalgarSquare.Web.ViewModels.User.UserProfileViewModel
 
 <div class="row">
+    <h2>@Model.Username</h2>
     <div class="col-md-2">
         @if (!string.IsNullOrEmpty(Model.AvatarUrl))
         {
@@ -12,7 +13,7 @@
             <img src="http://gravatar.com/avatar/658f2039885a85cc03cc31e20919bed6?s=512" alt="avatar-@Model.Username" style="max-width: 100%" />
         }
     </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
         <p>Username: @Model.Username</p>
         <p>Email: @Model.Email</p>
         <p>
@@ -46,12 +47,32 @@
     <div class="col-md-2">
         @if (!Model.IsOwned)
         {
-            <div class="btn btn-sm btn-info">
-                Add Friend
-            </div>
+            if (Model.IsViewerFriend)
+            {
+                <div class="label label-success">
+                    Friend
+                </div>
+                <div class="btn btn-sm btn-danger">
+                    Remove Friend
+                </div>
+            }
+            else
+            {
+                <div class="btn btn-sm btn-info">
+                    Add Friend
+                </div>
+            }
+
+        }
+    </div>
+    <div class="col-md-3">
+        <h3>Friends:</h3>
+        @{
+            Html.RenderAction("GetFriends","Users",new {id=Model.Username});
         }
     </div>
 </div>
+
 @section scripts{
 
 }

@@ -34,5 +34,7 @@
         public int? CommentsCount { get; set; }
 
         public bool IsOwned { get; set; }
+
+        public bool IsViewerFriend { get; set; }
     }
 }
