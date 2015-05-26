@@ -308,10 +308,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\FunnyPictures\Index.cshtml" />
-    <Content Include="Views\FunnyCodes\Index.cshtml" />
     <Content Include="Views\Jokes\Index.cshtml" />
-    <Content Include="Views\TrainersQuotes\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\HomePostViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TopPostViewModel.cshtml" />
     <Content Include="Views\Shared\Partials\_TopPostsPartial.cshtml" />
@@ -324,6 +321,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\FunnyCodes\" />
+    <Folder Include="Views\FunnyPictures\" />
+    <Folder Include="Views\TrainersQuotes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

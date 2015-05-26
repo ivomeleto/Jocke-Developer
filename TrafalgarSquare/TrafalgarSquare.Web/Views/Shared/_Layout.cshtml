@@ -10,47 +10,54 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">@Html.ActionLink("Joke Developer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="#">@Html.ActionLink("Funny Pictures", "Index", "FunnyPictures")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.ActionLink("Trainers Quotes", "Index", "TrainersQuotes")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.ActionLink("Jokes", "Index", "Jokes")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.ActionLink("Funny Codes", "Index", "FunnyCodes")</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Top Users</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.Partial("_LoginPartial")</li>
-                </ul>
-            </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">@Html.ActionLink("Joke Developer", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})</a>
         </div>
-    </nav>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#">@Html.ActionLink("Funny Pictures", "Index", "FunnyPictures")</a>
+                        </li>
+                        <li>
+                            <a href="#">@Html.ActionLink("Trainers Quotes", "Index", "TrainersQuotes")</a>
+                        </li>
+                        <li>
+                            <a href="#">@Html.ActionLink("Jokes", "Index", "Jokes")</a>
+                        </li>
+                        <li>
+                            <a href="#">@Html.ActionLink("Funny Codes", "Index", "FunnyCodes")</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Top Users</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.Partial("_LoginPartial")</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-dismissible alert-info">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Heads up!</strong> @TempData["Success"]
+        </div>
+    }
     <div class="container margin-30">
         <div class="col-sm-3">
             <h3>TOP 10 POSTs</h3>
