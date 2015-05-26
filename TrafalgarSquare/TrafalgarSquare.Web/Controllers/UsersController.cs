@@ -50,6 +50,39 @@
             return this.View(user);
         }
 
+        [Authorize]
+        public ActionResult TopUsers(int? showNumber)
+        {
+            if (showNumber == null)
+            {
+                showNumber = 10;
+            }
+
+            var users = this.Data.Users
+                .All()
+                .GroupJoin(
+                    this.Data.PostsLikes.All(),
+                    x => x.Id,
+                    postLikes => postLikes.Post.PostOwnerId,
+                    (user, postLikes) => new
+                    {
+                        user = user,
+                        postLikes = postLikes.Count()
+                    })
+                .OrderByDescending(x => x.postLikes)
+                .ThenBy(x => x.user.UserName)
+                .Take((int)showNumber)
+                .Select(x => new TopUserViewModel()
+                {
+                    Id = x.user.Id,
+                    AvatarUrl = x.user.AvatarUrl,
+                    Username = x.user.UserName,
+                    TotalLikes = x.postLikes
+                }).ToList();
+
+            return this.View(users);
+        }
+
 
         [Authorize]
         public ActionResult AddFriend(string id)

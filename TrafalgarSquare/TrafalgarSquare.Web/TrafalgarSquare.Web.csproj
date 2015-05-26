@@ -213,6 +213,7 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="ViewModels\User\TopUserViewModel.cs" />
     <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />
     <Compile Include="Hubs\Chat.cs" />
@@ -318,6 +319,7 @@
     <Content Include="Views\Users\AcceptFriendRequest.cshtml" />
     <Content Include="Views\CommentsApi\Comments.cshtml" />
     <Content Include="Views\Comments\Comments.cshtml" />
+    <Content Include="Views\Users\TopUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

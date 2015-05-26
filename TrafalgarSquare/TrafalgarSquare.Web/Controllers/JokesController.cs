@@ -14,7 +14,7 @@ namespace TrafalgarSquare.Web.Controllers
         public ActionResult Index()
         {
             var posts = Data.Posts.All()
-                .Where(p => p.Category.Name.Equals("Jockes"))
+                .Where(p => p.Category.Name.Equals("Jokes"))
                 .OrderByDescending(p => p.CreatedDateTime)
                 .ThenBy(p => p.LikesPost.Count())
                 .Select(p => new JokesViewModel

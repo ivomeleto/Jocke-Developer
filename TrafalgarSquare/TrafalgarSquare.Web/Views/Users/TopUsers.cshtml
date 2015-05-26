@@ -1,0 +1,29 @@
+﻿@model IEnumerable<TrafalgarSquare.Web.ViewModels.User.TopUserViewModel>
+
+<table >
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Username</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var i = 1;
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>
+                        <img src="@user.AvatarUrl" alt="avatar-@user.Username" />
+                        <a href="/User/Profile/@user.Username">@user.Username</a>
+                    </td>
+                    <td>@user.TotalLikes</td>
+                </tr>
+                i++;
+            }
+        }
+
+    </tbody>
+</table>

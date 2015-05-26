@@ -66,7 +66,8 @@ namespace TrafalgarSquare.Data.Migrations
                     UserName = "Icakis",
                     Email = "Icakis_87@abv.bg",
                     Gender = Gender.Male,
-                    Birthday = new DateTime(1987, 6, 16)
+                    Birthday = new DateTime(1987, 6, 16),
+                    AvatarUrl = "https://forum.codoh.com/images/avatars/avatar-blank.jpg"
                 };
 
                 var adminRole = context.Roles.FirstOrDefault(x => x.Name == "Administrator");
@@ -141,6 +142,7 @@ namespace TrafalgarSquare.Data.Migrations
                     SecurityStamp = "79089894-1067-4682-adcf-7508969b5836",
                     UserName = "Penka",
                     Email = "penka23@abv.bg",
+                    AvatarUrl = "https://forum.codoh.com/images/avatars/avatar-blank.jpg"
                 };
 
                 // Add Posts
@@ -208,6 +210,7 @@ namespace TrafalgarSquare.Data.Migrations
                     SecurityStamp = "c4933bb9-3645-44d0-bd41-1453ffbf072e",
                     UserName = "Stavri",
                     Email = "ss@abv.bg",
+                    AvatarUrl = "https://forum.codoh.com/images/avatars/avatar-blank.jpg"
                 };
 
                 // Add Posts
