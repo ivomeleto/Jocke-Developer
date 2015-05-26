@@ -8,7 +8,7 @@
         // GET: FunnyCodes
         public ActionResult Index()
         {
-            return View();
+            return View("FunnyCodesView");
         }
 
         public FunnyCodesController(ITrafalgarSquareData data) : base(data)

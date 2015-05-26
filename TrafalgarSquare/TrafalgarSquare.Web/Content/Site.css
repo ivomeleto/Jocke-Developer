@@ -58,3 +58,7 @@ select {
     padding: 45px 15px 15px;
     position: relative;
 }
+
+.footer {
+    text-align: center;
+}
