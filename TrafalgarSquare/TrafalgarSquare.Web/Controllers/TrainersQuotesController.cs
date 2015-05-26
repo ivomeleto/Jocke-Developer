@@ -16,7 +16,7 @@
 
         public ActionResult Index()
         {
-            return this.View();
+            return this.View("TrainersQuotesView");
         }
     }
 }
