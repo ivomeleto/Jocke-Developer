@@ -1,0 +1,16 @@
+﻿<code>{
+var data = LoadData();
+#region Work with database
+var verification = VerifySomething();
+if (!verification)
+{
+throw new DataCorruptedException();
+}
+Do(data);
+DoSomethingElse(data);
+#endregion
+#region Audit
+var auditEngine = InitializeAuditEngine();
+auditEngine.Submit(data);
+#endregion
+}</code> 
