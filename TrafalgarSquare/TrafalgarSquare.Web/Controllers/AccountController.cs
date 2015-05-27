@@ -71,14 +71,16 @@
         {
             if (!ModelState.IsValid)
             {
-                TempData["Success"] = "Loggin success!";
+                TempData["Error"] = "Loggin error!";
+                 
                 return this.View(model);
             }
-           
+
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await this.SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
+            TempData["Success"] = "Loggin success!";
             switch (result)
             {
                 case SignInStatus.Success:
@@ -90,8 +92,10 @@
                 case SignInStatus.Failure:
                 default:
                     this.ModelState.AddModelError("", "Invalid login attempt.");
+                    TempData["Error"] = "Loggin error!";
+                    TempData["Success"] = null;
                     return this.View(model);
-            }
+            }        
         }
 
         // GET: /Account/VerifyCode
