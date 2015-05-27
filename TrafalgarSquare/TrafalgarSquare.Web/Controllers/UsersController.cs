@@ -92,6 +92,7 @@
         }
 
         [Authorize]
+        [HttpPost]
         public ActionResult AddFriend(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -180,7 +181,7 @@
             }
 
             this.Data.SaveChanges();
-            return this.View(model);
+            return this.PartialView(model);
         }
 
         [Authorize]
@@ -296,7 +297,13 @@
                     AvatarUrl = x.Friend.AvatarUrl,
                     Username = x.Friend.UserName,
                     IsAcceptedFriendShip = x.Friend.Friends.Any(z => z.FriendId == x.UserId && z.IsAccepted == true)
-                }).ToList();
+                });
+            if (User.Identity.GetUserId() != id)
+            {
+                friends = friends.Where(x => x.IsAcceptedFriendShip == true);
+            }
+
+            friends = friends.ToList();
 
             if (Request.IsAjaxRequest())
             {

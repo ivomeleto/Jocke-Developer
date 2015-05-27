@@ -18,25 +18,25 @@
         <p>Email: @Model.Email</p>
         <p>
             City:@if (Model.City != null)
-                 {
-                     @Model.City
-                 }
-                 else
-                 {
-                     @:-
+            {
+                @Model.City
+            }
+            else
+            {
+                @:-
                  }
         </p>
         <p>Birthday: @Model.Birthday</p>
         <p>
             Age: @if (Model.Birthday != null)
-                 {
-                     TimeSpan ts = DateTime.Now - (DateTime)Model.Birthday;
-                     DateTime Age = DateTime.MinValue.AddDays(ts.Days);
-                     @: @string.Format(" {0} Years {1} Month {2} Days", Age.Year - 1, Age.Month - 1, Age.Day - 1)
+            {
+                TimeSpan ts = DateTime.Now - (DateTime)Model.Birthday;
+                DateTime Age = DateTime.MinValue.AddDays(ts.Days);
+                @: @string.Format(" {0} Years {1} Month {2} Days", Age.Year - 1, Age.Month - 1, Age.Day - 1)
                  }
-                 else
-                 {
-                     @:-
+            else
+            {
+                @:-
                  }
         </p>
         <p>Gender: @Model.Gender</p>
@@ -49,16 +49,18 @@
         {
             if (Model.IsViewerFriend)
             {
-                <div class="label label-success">
-                    Friend
-                </div>
-                <div class="btn btn-sm btn-danger">
-                    Remove Friend
+                <div id="myFriendStatusDiv">
+                    <div class="label label-success">
+                        Friend
+                    </div>
+                    <div class="btn btn-sm btn-danger" id="removeFriendButton">
+                        Remove Friend
+                    </div>
                 </div>
             }
             else
             {
-                <div class="btn btn-sm btn-info">
+                <div class="btn btn-sm btn-info" id="addFriendButton">
                     Add Friend
                 </div>
             }
@@ -70,16 +72,45 @@
     </div>
 </div>
 
-@section scripts{
+@section Scripts{
     <script type="text/javascript">
+        $("#addFriendButton").click(function () {
+            @*$.post('/Users/AddFriend/', { id: "@Model.Id" },
+                    function (returnedData) {
+                        console.log(returnedData);
+                    }), function (error) {
+                        console.log(error);
+                    };*@
+            $.ajax({
+                type: "POST",
+                url: '/Users/AddFriend/',
+                data: { id: "@Model.Id" },
+                success: function (returnedData) {
+                    console.log(returnedData);
+                }
+            });
+        });
+        
+        $("#removeFriendButton").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '/Users/RemoveFriend/',
+                data: { id: "@Model.Id" },
+                success: function (returnedData) {
+                    console.log(returnedData);
+                }
+            });
+        });
+
+
         $.ajax({
             url: "/Users/GetFriends/@Model.Username",
             contentType: "application/html;  chartset=utf-8",
             type: 'GET',
-            datatype:'html'
-        }).success(function(responseHtml) {
+            datatype: 'html'
+        }).success(function (responseHtml) {
             $('#friendsDiv').html(responseHtml);
-        }).error(function(error) {
+        }).error(function (error) {
             $('#friendsDiv').html("Friends cannot be loaded!");
         });
     </script>
