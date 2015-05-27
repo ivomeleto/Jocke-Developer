@@ -65,15 +65,23 @@
 
         }
     </div>
-    <div class="col-md-3">
-        <h3>Friends:</h3>
-        @{
-            Html.RenderAction("GetFriends","Users",new {id=Model.Username});
-        }
+    <div class="col-md-3" id="friendsDiv">
+
     </div>
 </div>
 
 @section scripts{
-
+    <script type="text/javascript">
+        $.ajax({
+            url: "/Users/GetFriends/@Model.Username",
+            contentType: "application/html;  chartset=utf-8",
+            type: 'GET',
+            datatype:'html'
+        }).success(function(responseHtml) {
+            $('#friendsDiv').html(responseHtml);
+        }).error(function(error) {
+            $('#friendsDiv').html("Friends cannot be loaded!");
+        });
+    </script>
 }
 

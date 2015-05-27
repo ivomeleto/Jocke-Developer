@@ -59,7 +59,7 @@
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            
+            ViewBag.ReturnUrl = returnUrl;
             return this.View();
         }
 
@@ -448,6 +448,7 @@
             {
                 return this.Redirect(returnUrl);
             }
+
             return this.RedirectToAction("Index", "Home");
         }
 

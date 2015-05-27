@@ -8,6 +8,8 @@
 
     public class FreindViewModel : IMapFrom<Models.User>
     {
+        public int Number { get; set; }
+
         public string Id { get; set; }
 
         public string Username { get; set; }

@@ -22,14 +22,6 @@
         public ActionResult Index(string username)
         {
             var userId = User.Identity.GetUserId();
-            bool isFriends = false;
-            if (User.Identity.GetUserName() != username)
-            {
-                isFriends = this.Data.UsersFriends
-                    .All()
-                    .Any(x => x.Friend.UserName == username && x.IsAccepted == true);
-            }
-
             var user = this.Data.Users
               .All()
               .Where(x => x.UserName == username)
@@ -47,13 +39,20 @@
                   PostCount = x.Posts.Count(),
                   CommentsCount = x.Comments.Count(),
                   IsOwned = userId == x.Id,
-                  IsViewerFriend = isFriends
               })
               .FirstOrDefault();
 
             if (user == null)
             {
                 throw new Exception("No user with such username.");
+            }
+
+            // Check if viewer is friend with this user
+            if (User.Identity.GetUserName() != username)
+            {
+                user.IsViewerFriend = this.Data.UsersFriends
+                    .All()
+                    .Any(x => x.UserId == userId && x.Friend.UserName == username && x.IsAccepted == true);
             }
 
             return this.View(user);
@@ -91,7 +90,6 @@
 
             return this.View(users);
         }
-
 
         [Authorize]
         public ActionResult AddFriend(string id)
@@ -270,6 +268,7 @@
             return new EmptyResult();
         }
 
+        [Authorize]
         public ActionResult GetFriends(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -289,13 +288,20 @@
             var friends = this.Data.UsersFriends.All()
                 .Where(x => x.User.UserName == id && x.IsAccepted == true)
                 .OrderBy(x => x.Friend.UserName)
-                .Select(x => new FreindViewModel()
+                .AsEnumerable()
+                .Select((x, i) => new FreindViewModel()
                 {
+                    Number = i,
                     Id = x.FriendId,
                     AvatarUrl = x.Friend.AvatarUrl,
                     Username = x.Friend.UserName,
                     IsAcceptedFriendShip = x.Friend.Friends.Any(z => z.FriendId == x.UserId && z.IsAccepted == true)
                 }).ToList();
+
+            if (Request.IsAjaxRequest())
+            {
+                return this.PartialView(friends);
+            }
 
             return this.View(friends);
         }

@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<TrafalgarSquare.Web.ViewModels.User.FreindViewModel>
-@{
-    Layout = null;
-}
+<h3>Friends:</h3>
 <table>
     <thead>
         <tr>
@@ -12,11 +10,10 @@
     </thead>
     <tbody>
         @{
-            var i = 1;
             foreach (var friend in Model)
             {
                 <tr>
-                    <td>@i</td>
+                    <td>@(friend.Number+1)</td>
                     <td>
                         <img src="@friend.AvatarUrl" alt="avatar-@friend.Username" />
                         <a href="/User/Profile/@friend.Username">@friend.Username</a>
@@ -32,7 +29,6 @@
                         }
                     </td>
                 </tr>
-                        i++;
             }
         }
 
