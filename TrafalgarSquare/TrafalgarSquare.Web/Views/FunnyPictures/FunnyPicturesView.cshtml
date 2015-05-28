@@ -1,4 +1,8 @@
-﻿<div id="wrapper">
+﻿@{
+    ViewBag.Title = "Funny Pictures";
+}
+
+<div id="wrapper">
 
     <div class="panel panel-default">
         <div class="panel-body text-muted">
@@ -8,12 +12,14 @@
 
     <h1 class="text-warning">Заглавие на joke-a</h1>
     <hr />
+
     <ul class="nav nav-pills">
         <li class="active">
             <a href="FunnyPictures#"><span class="glyphicon glyphicon-star"> Joke Likes</span> <span class="badge">42</span></a> 
             <a href="#"><span aria-hidden="true"></span><span class="glyphicon glyphicon-thumbs-up"> Like this joke</span></a>
         </li>
     </ul> 
+
     <br>
     <br>
 
@@ -22,14 +28,18 @@
     <div>
         <strong>Author: </strong><a href="#">Pesho</a>
     </div>
+
     <br>
-    <!-- <a href="FunnyPictures#" class="btn btn-primary btn-sm">Report something</a> -->
+
     <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-bell"> Report something</span></a>
 
     <div class="post-box text-center">
         <br>
 
-        <a href="#"><img src="http://qph.is.quoracdn.net/main-qimg-90dc8252d4f952a0d93e3d8b1ce05419?convert_to_webp=true" class="img-thumbnail joke-box-image" alt="Alternate Text"></a>
+        @*==========LOADING PARTIAL CONTENT*@
+        <a href="#">
+            @Html.Partial("_FunnyPicturesMediaPartial")
+        </a>
 
 
         <ul class="pager">
@@ -45,7 +55,7 @@
     </div>
 
 
-
+    @*===============COMMENTS*@
     <h2>Comments:</h2>
     <div class="panel panel-success" id="comment-box">
         <div class="panel-heading">
@@ -75,5 +85,4 @@
         </div>
     </div> <!-- comment box tag end -->
 
-
-</div>
+</div><!-- wrapper tag end -->

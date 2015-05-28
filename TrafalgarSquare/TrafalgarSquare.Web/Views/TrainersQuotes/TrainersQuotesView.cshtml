@@ -1,42 +1,91 @@
 ﻿
 @{
-    ViewBag.Title = "TrainersQuotesView";
+    ViewBag.Title = "Trainers' Quotes";
 }
 
-<h2>TrainersQuotesView</h2>
-<hr />
-<h3>Заглавие на поста (joke)</h3>
-<p>Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
-<div class="post-box">
+<div id="wrapper">
+
+    <div class="panel panel-default">
+        <div class="panel-body text-muted">
+            Categorie / Trainers' Quotes
+        </div>
+    </div>
+
+    <h1 class="text-warning">Заглавие на joke-a</h1>
+    <hr />
 
     <ul class="nav nav-pills">
-        <li class="active"><a href="#">This Joke Likes <span class="badge">42</span></a></li>
+        <li class="active">
+            <a href="FunnyPictures#"><span class="glyphicon glyphicon-star"> Joke Likes</span> <span class="badge">42</span></a>
+            <a href="#"><span aria-hidden="true"></span><span class="glyphicon glyphicon-thumbs-up"> Like this joke</span></a>
+        </li>
     </ul>
-    <br />
-    @Html.Partial("_TrainersQuotesMediaPartial")
-    <ul class="pager">
-        <li><a href="#">Previous</a></li>
-        <li><a href="#">Next</a></li>
-    </ul>
-    <br />
-    <br />
-</div>
-<ul class="list-group" id="author-post">
-    <li class="list-group-item">
-        <span class="badge">All total jockes likes 154</span>
-        <strong>Author: </strong>Pesho
-    </li>
-</ul>
 
-<a href="#" class="btn btn-primary btn-sm">Report something</a>
+    <br>
+    <br>
 
-<h2>Joke Comments</h2>
-<div class="panel panel-warning" id="comment-box">
-    <div class="panel-heading">
-        <h3 class="panel-title">Goshko says (12-06-2015)</h3>
+    <p>Техт на joke-а. Ако няма текст - няма да го дисплейваме този параграф. Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+
+    <div>
+        <strong>Author: </strong><a href="#">Pesho</a>
     </div>
-    <div class="panel-body">
-        Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-    </div>
-</div>
 
+    <br>
+
+    <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-bell"> Report something</span></a>
+
+    <div class="post-box text-center">
+        <br>
+
+        @*==========LOADING PARTIAL CONTENT*@
+        <a href="#">
+            @Html.Partial("_TrainersQuotesMediaPartial")
+        </a>
+
+
+        <ul class="pager">
+            <li class="previous disabled">
+                <a href="#">← Previous Joke</a>
+            </li>
+            <li class="next">
+                <a href="#">Next Joke →</a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </div>
+
+
+    @*===============COMMENTS*@
+    <h2>Comments:</h2>
+    <div class="panel panel-success" id="comment-box">
+        <div class="panel-heading">
+            <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+        </div>
+        <div class="panel-body">
+            Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+        </div>
+    </div> <!-- comment box tag end -->
+
+    <div class="panel panel-success" id="comment-box">
+        <div class="panel-heading">
+            <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+        </div>
+        <div class="panel-body">
+            Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+        </div>
+    </div> <!-- comment box tag end -->
+
+
+    <div class="panel panel-success" id="comment-box">
+        <div class="panel-heading">
+            <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+        </div>
+        <div class="panel-body">
+            Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+        </div>
+    </div> <!-- comment box tag end -->
+
+</div> <!-- wrapper tag end -->
+          
+       
