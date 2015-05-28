@@ -36,5 +36,7 @@
         public bool IsOwned { get; set; }
 
         public bool IsViewerFriend { get; set; }
+
+        public bool IsViewerWaitingAcceptance { get; set; }
     }
 }

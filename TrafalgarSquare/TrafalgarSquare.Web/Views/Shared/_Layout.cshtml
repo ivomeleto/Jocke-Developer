@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,110 +8,85 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </head>
-
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">@Html.ActionLink("Joke Developer", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})</a>
-        </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"></a><a class="navbar-brand" href="/">Joke Developer</a>
+            </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="#">@Html.ActionLink("Funny Pictures", "Index", "FunnyPictures")</a>
-                        </li>
-                        <li>
-                            <a href="#">@Html.ActionLink("Trainers Quotes", "Index", "TrainersQuotes")</a>
-                        </li>
-                        <li>
-                            <a href="#">@Html.ActionLink("Jokes", "Index", "Jokes")</a>
-                        </li>
-                        <li>
-                            <a href="#">@Html.ActionLink("Funny Codes", "Index", "FunnyCodes")</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/Users/TopUsers/">Top Users</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>@Html.Partial("_LoginPartial")</li>
-            </ul>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#"></a><a href="/FunnyPictures">Funny Pictures</a>
+                            </li>
+                            <li>
+                                <a href="#"></a><a href="/TrainersQuotes">Trainers Quotes</a>
+                            </li>
+                            <li>
+                                <a href="#"></a><a href="/Jokes">Jokes</a>
+                            </li>
+                            <li>
+                                <a href="#"></a><a href="/FunnyCodes">Funny Codes</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/Users/TopUsers/">Top Users</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
+                            <input name="__RequestVerificationToken" type="hidden" value="kasdqnIZa_OAtBvoNPlHDvn-sajIQQoVUZfM70IH7CKFBm5BlQnjQJMrPltkcIAiBJp0HVUzx9fVcJoStl3MiLuZ4QO5oQYxdXFhm3w_peIWYam5ZUW1Iw8tGvg_-O2-U12FCq6yePtZiC3MbxNguw2">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="Manage" title="Manage">Hi, @User.Identity.GetUserName()!</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                                </li>
+                            </ul>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- TOP 10 JOKES OF ALL TIME -->
+        <section id="topJokes">
+            @{Html.RenderAction("PartialTop10Jokes", "Home");}
+        </section>
+
+        <!-- MAIN BOX -->
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
     </div>
-</nav>
 
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-dismissible alert-info">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Heads up!</strong> @TempData["Success"]
-        </div>
-    }
-
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Oh snap!</strong> @TempData["Error"]
-        </div>
-    }
-
-<div class="container margin-30">
-        <div class="col-sm-3">
-            <h3>TOP 10 POSTs</h3>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">14</span> Cras justo odio
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">2</span> Dapibus ac facilisis in
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">1</span> Morbi leo risus
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">14</span> Cras justo odio
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">2</span> Dapibus ac facilisis in
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">1</span> Morbi leo risus
-                </li>
-            </ul>
-            <h3>Random Jocke</h3>
-            <a href="#" class="btn btn-default btn-lg btn-block">Block level button</a>
-        </div>
-
-        <div class="col-sm-9">
-            @RenderBody()
-        </div>
-
-
-
-    </div>
-    <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer text-center">
         <ul class="breadcrumb">
             <li class="active">Joke Developer - SoftUni ASP.NET MVC Course teamwork project 2015</li>
         </ul>
     </footer>
-
-
-    @Scripts.Render("~/bundles/jquery") @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
-
 </html>

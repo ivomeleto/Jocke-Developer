@@ -17,7 +17,6 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-
 input,
 select {
     max-width: 280px;
@@ -60,53 +59,19 @@ select {
     position: relative;
 }
 
-
-
+.footer {
+    text-align: center;
+}
 .alert {
     max-width: 50em;
     margin-left: auto;
     margin-right: auto;
 }
 
-#left-menu-box{
-    background-color: #F0F0F0;
+.displayNone {
+    display: none;
 }
 
-.top-joke-entity-box {
-    padding-top: 0.5em;
-    margin-top: -0.5em;
-
+.displayBlock {
+    display: block;
 }
-.top-joke-entity-box:hover{
-    background-color: #E4E4E4;
-}
-
-.image-left-small-box {
-    width: 45px;
-    max-height: 50px;
-
-}
-
-#random-joke-image{
-    width: 190px;
-    margin-bottom: 20px;
-}
-.jumbotron{
-    background-color: #FFFFFF;
-}
-
-.home-category-img{
-    width: 180px;
-}
-
-.home-categoty-box{
-    background-color: #F0F0F0;
-    padding-top: 1.5em;
-    margin-bottom: 3em;
-}
-
-#wrapper{
-    margin: 4em 2em 2em 2em;
-}
-
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");

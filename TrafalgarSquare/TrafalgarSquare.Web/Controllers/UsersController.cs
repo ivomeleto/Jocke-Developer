@@ -21,39 +21,7 @@
         [Authorize]
         public ActionResult Index(string username)
         {
-            var userId = User.Identity.GetUserId();
-            var user = this.Data.Users
-              .All()
-              .Where(x => x.UserName == username)
-              .Select(x => new UserProfileViewModel()
-              {
-                  Id = x.Id,
-                  AvatarUrl = x.AvatarUrl,
-                  Username = x.UserName,
-                  Email = x.Email,
-                  Birthday = x.Birthday,
-                  City = x.City,
-                  Gender = x.Gender.ToString(),
-                  Name = x.Name,
-                  RegisterDate = x.RegisterDate,
-                  PostCount = x.Posts.Count(),
-                  CommentsCount = x.Comments.Count(),
-                  IsOwned = userId == x.Id,
-              })
-              .FirstOrDefault();
-
-            if (user == null)
-            {
-                throw new Exception("No user with such username.");
-            }
-
-            // Check if viewer is friend with this user
-            if (User.Identity.GetUserName() != username)
-            {
-                user.IsViewerFriend = this.Data.UsersFriends
-                    .All()
-                    .Any(x => x.UserId == userId && x.Friend.UserName == username && x.IsAccepted == true);
-            }
+            var user = this.UserProfileData(username);
 
             return this.View(user);
         }
@@ -311,6 +279,61 @@
             }
 
             return this.View(friends);
+        }
+
+        [Authorize]
+        public JsonResult GetFriendStatus(string id)
+        {
+            var user = this.UserProfileData(id);
+
+            return this.Json(user, JsonRequestBehavior.AllowGet);
+        }
+
+        private UserProfileViewModel UserProfileData(string username)
+        {
+            var userId = User.Identity.GetUserId();
+            var user = this.Data.Users
+                .All()
+                .Where(x => x.UserName == username)
+                .Select(x => new UserProfileViewModel()
+                {
+                    Id = x.Id,
+                    AvatarUrl = x.AvatarUrl,
+                    Username = x.UserName,
+                    Email = x.Email,
+                    Birthday = x.Birthday,
+                    City = x.City,
+                    Gender = x.Gender.ToString(),
+                    Name = x.Name,
+                    RegisterDate = x.RegisterDate,
+                    PostCount = x.Posts.Count(),
+                    CommentsCount = x.Comments.Count(),
+                    IsOwned = userId == x.Id,
+                })
+                .FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new Exception("No user with such username.");
+            }
+
+            // Check if viewer is friend with this user
+            if (User.Identity.GetUserName() != username)
+            {
+                user.IsViewerFriend = this.Data.UsersFriends
+                    .All()
+                    .Count(x => (x.UserId == userId && x.Friend.UserName == username && x.IsAccepted == true) ||
+                                (x.User.UserName == username && x.Friend.Id == userId && x.IsAccepted == true)) == 2;
+                if (!user.IsViewerFriend)
+                {
+                    user.IsViewerWaitingAcceptance = this.Data.UsersFriends
+                        .All()
+                        .Count(x => (x.UserId == userId && x.Friend.UserName == username && x.IsAccepted == true) ||
+                                    (x.User.UserName == username && x.Friend.Id == userId && x.IsAccepted == false)) == 2;
+                }
+            }
+
+            return user;
         }
     }
 }

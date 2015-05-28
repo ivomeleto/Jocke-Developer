@@ -1,5 +1,6 @@
 ﻿namespace TrafalgarSquare.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Data;
@@ -64,6 +65,11 @@
             ViewBag.Message = "Your contact page.";
 
             return this.View();
+        }
+
+        public ActionResult PartialTop10Jokes()
+        {
+            return this.PartialView("Partials/_Top10PostsPartial", this.Top10Jokes());
         }
     }
 }

@@ -24,7 +24,7 @@
             else
             {
                 @:-
-                 }
+            }
         </p>
         <p>Birthday: @Model.Birthday</p>
         <p>
@@ -47,24 +47,20 @@
     <div class="col-md-2">
         @if (!Model.IsOwned)
         {
-            if (Model.IsViewerFriend)
-            {
-                <div id="myFriendStatusDiv">
-                    <div class="label label-success">
-                        Friend
-                    </div>
-                    <div class="btn btn-sm btn-danger" id="removeFriendButton">
-                        Remove Friend
-                    </div>
+            <div id="myFriendStatusDiv">
+                <div class="label label-success @(Model.IsViewerFriend ? "displayBlock" : "displayNone")" id="friendLabel">
+                    Friend
                 </div>
-            }
-            else
-            {
-                <div class="btn btn-sm btn-info" id="addFriendButton">
-                    Add Friend
+                <div class="btn btn-sm btn-warning @(!Model.IsViewerFriend && Model.IsViewerWaitingAcceptance ? "displayBlock" : "displayNone")" id="waitingAcceptanceLabel">
+                    Waiting Acceptance
                 </div>
-            }
-
+                <div class="btn btn-sm btn-danger @(Model.IsViewerFriend || (!Model.IsViewerFriend && Model.IsViewerWaitingAcceptance )? "displayBlock" : "displayNone")" id="removeFriendButton">
+                    Remove Friend
+                </div>
+            </div>
+            <div class="btn btn-sm btn-info @(!Model.IsViewerFriend && !Model.IsViewerWaitingAcceptance ? "displayBlock" : "displayNone")" id="addFriendButton">
+                Add Friend
+            </div>
         }
     </div>
     <div class="col-md-3" id="friendsDiv">
@@ -74,45 +70,99 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $("#addFriendButton").click(function () {
-            @*$.post('/Users/AddFriend/', { id: "@Model.Id" },
-                    function (returnedData) {
-                        console.log(returnedData);
-                    }), function (error) {
-                        console.log(error);
-                    };*@
+        function getFriends() {
             $.ajax({
-                type: "POST",
-                url: '/Users/AddFriend/',
-                data: { id: "@Model.Id" },
-                success: function (returnedData) {
-                    console.log(returnedData);
-                }
+                url: "/Users/GetFriends/@Model.Username",
+                contentType: "application/html;  chartset=utf-8",
+                type: 'GET',
+                datatype: 'html'
+            }).success(function (responseHtml) {
+                $('#friendsDiv').html(responseHtml);
+            }).error(function (error) {
+                $('#friendsDiv').html("Friends cannot be loaded!");
             });
-        });
-        
-        $("#removeFriendButton").click(function () {
-            $.ajax({
-                type: "POST",
-                url: '/Users/RemoveFriend/',
-                data: { id: "@Model.Id" },
-                success: function (returnedData) {
-                    console.log(returnedData);
-                }
+        }
+
+        $(document).ready(function () {
+
+            // Add Friend
+            $("#addFriendButton").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Users/AddFriend/',
+                    data: { id: "@Model.Id" }
+                }).success(function (data) {
+                    // TODO: Display notification
+                    getFriends();
+                    jQuery.getJSON("/Users/GetFriendStatus/@Model.Username", null, function (user) {
+                        console.log(user);
+                        if (user.IsViewerFriend) {
+                            $("#myFriendStatusDiv").removeClass("displayNone");
+                            $("#myFriendStatusDiv").addClass("displayBlock");
+
+                            $("#friendLabel").removeClass("displayNone");
+                            $("#friendLabel").addClass("displayBlock");
+
+                            $("#waitingAcceptanceLabel").removeClass("displayBlock");
+                            $("#waitingAcceptanceLabel").addClass("displayNone");
+
+                            $("#removeFriendButton").removeClass("displayNone");
+                            $("#removeFriendButton").addClass("displayBlock");
+
+                            $("#addFriendButton").removeClass("displayBlock");
+                            $("#addFriendButton").addClass("displayNone");
+
+                        } else if (!user.IsViewerFriend && user.IsViewerWaitingAcceptance) {
+                            $("#myFriendStatusDiv").removeClass("displayNone");
+                            $("#myFriendStatusDiv").addClass("displayBlock");
+
+                            $("#friendLabel").removeClass("displayBlock");
+                            $("#friendLabel").addClass("displayNone");
+
+                            $("#waitingAcceptanceLabel").removeClass("displayNone");
+                            $("#waitingAcceptanceLabel").addClass("displayBlock");
+
+                            $("#removeFriendButton").removeClass("displayNone");
+                            $("#removeFriendButton").addClass("displayBlock");
+
+                            $("#addFriendButton").removeClass("displayBlock");
+                            $("#addFriendButton").addClass("displayNone");
+
+                        } else if (!user.IsViewerFriend && !user.IsViewerWaitingAcceptance) {
+                            $("#myFriendStatusDiv").removeClass("displayBlock");
+                            $("#myFriendStatusDiv").addClass("displayNone");
+
+                            $("#addFriendButton").removeClass("displayNone");
+                            $("#addFriendButton").addClass("displayBlock");
+                        }
+                    });
+                }).error(function (error) {
+                    console.log(error);
+                    // TODO: Display exception message
+                });
             });
+
+            // Remove Friend
+            $("#removeFriendButton").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Users/RemoveFriend/',
+                    data: { id: "@Model.Id" },
+                }).success(function (data) {
+                    getFriends();
+                    $("#myFriendStatusDiv").removeClass("displayBlock");
+                    $("#myFriendStatusDiv").addClass("displayNone");
+
+                    $("#addFriendButton").removeClass("displayNone");
+                    $("#addFriendButton").addClass("displayBlock");
+                }).error(function (error) {
+
+                });
+            });
+
+            getFriends();
         });
 
-
-        $.ajax({
-            url: "/Users/GetFriends/@Model.Username",
-            contentType: "application/html;  chartset=utf-8",
-            type: 'GET',
-            datatype: 'html'
-        }).success(function (responseHtml) {
-            $('#friendsDiv').html(responseHtml);
-        }).error(function (error) {
-            $('#friendsDiv').html("Friends cannot be loaded!");
-        });
     </script>
 }
 

@@ -1,24 +1,18 @@
 ﻿@model TrafalgarSquare.Web.ViewModels.TopPostViewModel
 
-<div class="panel-group">
-    <div class="panel panel-default" id="@string.Format("panel{0}", Model.Id)">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-target="@string.Format("#collapse-panel{0}", Model.Id)" aria-expanded="true">
-                    <p class="row">
-                        <span class="col-md-10">
-                            @Model.Title
-                        </span>
-                        <span class="col-md-2 badge">@Model.LikesCount</span>
-                    </p>
-                </a>
-            </h4>
-        </div>
-        <div id="@string.Format("collapse-panel{0}", Model.Id)" class="panel-collapse collapse" aria-expanded="true">
-            <div class="panel-body">
-                <div class="row">posted by: @Model.PostOwner.UserName</div>
-                <div class="row">Likes: @Model.LikesCount</div>
-            </div>
-        </div>
+<div class="row top-joke-entity-box">
+    <div class="col-md-3">
+        <img class="image-left-small-box" src="https://s-media-cache-ak0.pinimg.com/236x/a0/28/ef/a028ef15ef6444130b7297ba19fd8bec.jpg" alt="">
     </div>
-</div>
+
+    <div class="col-md-5">
+        <a href="/Posts/@Model.Id">@Model.Title</a>
+    </div>
+
+    <div class="col-md-2">
+        <span class="badge">@Model.LikesCount <small>likes</small></span>
+        <br>
+        <small>author: @Model.PostOwner.UserName</small>
+    </div>
+</div> 
+<hr>
