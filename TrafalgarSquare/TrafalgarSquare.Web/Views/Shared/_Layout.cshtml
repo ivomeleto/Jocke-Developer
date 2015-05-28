@@ -49,19 +49,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
-                            <input name="__RequestVerificationToken" type="hidden" value="kasdqnIZa_OAtBvoNPlHDvn-sajIQQoVUZfM70IH7CKFBm5BlQnjQJMrPltkcIAiBJp0HVUzx9fVcJoStl3MiLuZ4QO5oQYxdXFhm3w_peIWYam5ZUW1Iw8tGvg_-O2-U12FCq6yePtZiC3MbxNguw2">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="Manage" title="Manage">Hi, @User.Identity.GetUserName()!</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                                </li>
-                            </ul>
-                        </form>
-                    </li>
+                    <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
             </div>
         </div>
