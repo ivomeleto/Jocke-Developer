@@ -5,11 +5,16 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
+    <ul id="user-nav-pannel" class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hi " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink(" Hi, " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage", @class = "glyphicon glyphicon-user"})
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li>
+            <a href="#" class="glyphicon glyphicon-envelope"> (0) Messages</a>
+        </li>
+        <li>
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="glyphicon glyphicon-off"> Log off</a>
+        </li>
     </ul>
     }
 }

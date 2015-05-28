@@ -1,4 +1,6 @@
-﻿body {
+﻿@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -109,4 +111,6 @@ select {
     margin: 4em 2em 2em 2em;
 }
 
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+#user-nav-pannel {
+    padding-right: 4em;
+}

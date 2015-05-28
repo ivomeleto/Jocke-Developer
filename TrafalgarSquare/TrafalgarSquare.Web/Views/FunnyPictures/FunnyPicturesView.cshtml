@@ -1,42 +1,79 @@
-﻿
-@{
-    ViewBag.Title = "FunnyPicturesView";
-}
+﻿<div id="wrapper">
 
-<h2>FunnyPicturesView</h2>
+    <div class="panel panel-default">
+        <div class="panel-body text-muted">
+            Categorie / Funny Pictures
+        </div>
+    </div>
 
-<hr />
-<h3>Заглавие на поста (joke)</h3>
-<p>Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
-<div class="post-box">
-
+    <h1 class="text-warning">Заглавие на joke-a</h1>
+    <hr />
     <ul class="nav nav-pills">
-        <li class="active"><a href="#">This Joke Likes <span class="badge">42</span></a></li>
-    </ul>
-    <br />
-    @Html.Partial("_FunnyPicturesMediaPartial")
-    <ul class="pager">
-        <li><a href="#">Previous</a></li>
-        <li><a href="#">Next</a></li>
-    </ul>
-    <br />
-    <br />
-</div>
-<ul class="list-group" id="author-post">
-    <li class="list-group-item">
-        <span class="badge">All total jokes likes 154</span>
-        <strong>Author: </strong>Pesho
-    </li>
-</ul>
+        <li class="active">
+            <a href="FunnyPictures#"><span class="glyphicon glyphicon-star"> Joke Likes</span> <span class="badge">42</span></a> 
+            <a href="#"><span aria-hidden="true"></span><span class="glyphicon glyphicon-thumbs-up"> Like this joke</span></a>
+        </li>
+    </ul> 
+    <br>
+    <br>
 
-<a href="#" class="btn btn-primary btn-sm">Report something</a>
+    <p>Техт на joke-а. Ако няма текст - няма да го дисплейваме този параграф. Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
 
-<h2>Joke Comments</h2>
-<div class="panel panel-warning" id="comment-box">
-    <div class="panel-heading">
-        <h3 class="panel-title">Goshko says (12-06-2015)</h3>
+    <div>
+        <strong>Author: </strong><a href="#">Pesho</a>
     </div>
-    <div class="panel-body">
-        Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+    <br>
+    <!-- <a href="FunnyPictures#" class="btn btn-primary btn-sm">Report something</a> -->
+    <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-bell"> Report something</span></a>
+
+    <div class="post-box text-center">
+        <br>
+
+        <a href="#"><img src="http://qph.is.quoracdn.net/main-qimg-90dc8252d4f952a0d93e3d8b1ce05419?convert_to_webp=true" class="img-thumbnail joke-box-image" alt="Alternate Text"></a>
+
+
+        <ul class="pager">
+            <li class="previous disabled">
+                <a href="#">← Previous Joke</a>
+            </li>
+            <li class="next">
+                <a href="#">Next Joke →</a>
+            </li>
+        </ul>
+        <br>
+        <br>
     </div>
+
+
+
+    <h2>Comments:</h2>
+    <div class="panel panel-success" id="comment-box">
+        <div class="panel-heading">
+            <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+        </div>
+        <div class="panel-body">
+            Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+        </div>
+    </div> <!-- comment box tag end -->
+
+    <div class="panel panel-success" id="comment-box">
+        <div class="panel-heading">
+            <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+        </div>
+        <div class="panel-body">
+            Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+        </div>
+    </div> <!-- comment box tag end -->
+
+
+    <div class="panel panel-success" id="comment-box">
+        <div class="panel-heading">
+            <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+        </div>
+        <div class="panel-body">
+            Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+        </div>
+    </div> <!-- comment box tag end -->
+
+
 </div>
