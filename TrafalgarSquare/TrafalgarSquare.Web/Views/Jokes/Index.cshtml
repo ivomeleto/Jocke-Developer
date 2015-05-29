@@ -4,8 +4,11 @@
     ViewBag.Title = "Jokes";
 }
 
+@*ВАЖНО - идеята на постовете  е да се показват по ЕДИН на страница, а отиването на следващ пост да остава със стрелките Next i Previus*@
+
 <div id="wrapper">
-    @foreach (var joke in Model)
+    @*TODO малоумие е да се върти цикъл за един елмент, да не се забрави да се оправи! *@
+    @for (int i = 0; i < 1; i++)
     {
         <div class="panel panel-default">
             <div class="panel-body text-muted">
@@ -13,12 +16,12 @@
             </div>
         </div>
 
-        <h1 class="text-warning">@joke.Title</h1>
+        <h1 class="text-warning">@Model[i].Title</h1>
         <hr />
 
         <ul class="nav nav-pills">
             <li class="active">
-                <a href="FunnyPictures#"><span class="glyphicon glyphicon-star"> Joke Likes</span> <span class="badge">@joke.Likes</span></a>
+                <a href="FunnyPictures#"><span class="glyphicon glyphicon-star"> Joke Likes</span> <span class="badge">@Model[i].Likes</span></a>
                 <a href="#"><span aria-hidden="true"></span><span class="glyphicon glyphicon-thumbs-up"> Like this joke</span></a>
             </li>
         </ul>
@@ -26,19 +29,20 @@
         <br>
         <br>
 
-        <p>@joke.Text</p>
+        <p>@Model[i].Text</p>
+        <br/>
 
         <div>
 
-            @if (!string.IsNullOrEmpty(joke.User.AvatarUrl))
+            @if (!string.IsNullOrEmpty(@Model[i].User.AvatarUrl))
             {
                 <div class="col-md-2">
-                    <img src="@joke.User.AvatarUrl" alt="@joke.User.Username" style="max-width: 30px" />
+                    <img src="@Model[i].User.AvatarUrl" alt="@Model[i].User.Username" style="max-width: 30px" />
                 </div>
             }
-            <strong>Author: </strong><a href="#">@joke.User.Username</a> <br />
-            <strong>Posted on: </strong><a href="#">@joke.CreatedDateTime</a>
-            <small>@*Is reported: @joke.IsReported*@</small>
+            <strong>Author: </strong><a href="#">@Model[i].User.Username</a> <br />
+            <strong>Posted on: </strong><a href="#">@Model[i].CreatedDateTime</a>
+            <small>@*Is reported: @Model[i].IsReported*@</small>
         </div>
 
         <br>
@@ -49,20 +53,20 @@
             <br>
 
             @*==========LOADING PARTIAL CONTENT*@
-       
-            @if (!string.IsNullOrEmpty(joke.Resource.FileUrl))
+
+            @if (!string.IsNullOrEmpty(@Model[i].Resource.FileUrl))
             {
                 <span>Attached file: </span>
-                <a href="@joke.Resource.FileUrl">download</a>
+                <a href="@Model[i].Resource.FileUrl">download</a>
             }
-            @if (!string.IsNullOrEmpty(joke.Resource.PictureUrl))
+            @if (!string.IsNullOrEmpty(@Model[i].Resource.PictureUrl))
             {
-                <img src="@joke.Resource.PictureUrl" class="img-thumbnail joke-box-image" alt="@joke.Title" />
+                <img src="@Model[i].Resource.PictureUrl" class="img-thumbnail joke-box-image" alt="@Model[i].Title" />
             }
-            @if (!string.IsNullOrEmpty(joke.Resource.VideoUrl))
+            @if (!string.IsNullOrEmpty(@Model[i].Resource.VideoUrl))
             {
                 <!-- <video controls>
-                    <source src="@joke.Resource.VideoUrl" type="video/mp4">
+                    <source src="@Model[i].Resource.VideoUrl" type="video/mp4">
                     Your browser does not support HTML5 video.
                 </video> -->
 
@@ -83,36 +87,52 @@
 
 
         @*===============COMMENTS*@
-        <h2>Comments <span>(@joke.CommentsCount)</span></h2>
-        <div class="panel panel-success" id="comment-box">
-            <div class="panel-heading">
-                <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
-            </div>
-            <div class="panel-body">
-                Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-            </div>
-        </div> <!-- comment box tag end -->
-
-        <div class="panel panel-success" id="comment-box">
-            <div class="panel-heading">
-                <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
-            </div>
-            <div class="panel-body">
-                Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-            </div>
-        </div> <!-- comment box tag end -->
 
 
-        <div class="panel panel-success" id="comment-box">
-            <div class="panel-heading">
-                <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+        if (@Model[i].CommentsCount != 0)
+        {
+            <h2>Comments <span>(@Model[i].CommentsCount)</span></h2>
+            <a href="#" class="btn btn-success disabled">View Comments</a>
+            <a href="#" class="btn btn-default">Post Comment</a>
+        }
+        else
+        {
+            <h2>Comments <span>(@Model[i].CommentsCount)</span></h2>
+            
+        //TODO: Да подкарам AJAX заявката, така че да се дисплейнат коментарите!!!!!!!!!!!
+        
+            @Ajax.ActionLink("View Comments", "DisplayCommentsInPost", @Model[i].Id,
+                new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "comment-box"
+                }, new { @class = "btn btn-success" })
+
+            <a href="#" class="btn btn-default">Post Comment</a>
+            <br/><br/>
+
+            <div id="comment-box">
+                to display comments
             </div>
-            <div class="panel-body">
-                Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-            </div>
-        </div> <!-- comment box tag end -->
+
+        }
+
+
+
+        @* <div class="panel panel-success" >
+                <div class="panel-heading">
+                    <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> Goshko</span></stron> <em>says (on date: 12-06-2015)</em></h3>
+                </div>
+                <div class="panel-body">
+                    Nullam quis risue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id ue penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+                </div>
+            </div> <!-- comment box tag end -->*@
+
+
     }
 </div><!-- wrapper tag end -->
+
+@*
 @section scripts{
     <script>
         function loadComments(itemId) {
@@ -155,3 +175,4 @@
             });
     </script>
 }
+*@
