@@ -258,7 +258,7 @@
                 .Where(x => x.User.UserName == id && x.IsAccepted == true)
                 .OrderBy(x => x.Friend.UserName)
                 .AsEnumerable()
-                .Select((x, i) => new FreindViewModel()
+                .Select((x, i) => new FriendViewModel()
                 {
                     Number = i,
                     Id = x.FriendId,

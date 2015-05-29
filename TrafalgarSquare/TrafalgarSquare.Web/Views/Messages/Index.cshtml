@@ -1,20 +1,50 @@
-﻿<div id="currentRooms">
-    <div>
-        Current rooms:
+﻿@model IEnumerable<TrafalgarSquare.Web.ViewModels.User.ChatFriendViewModel>
+<div>
+    <div class="col-md-9">
+        @*<div>
+                <div>
+                    Current rooms:
+                </div>
+            </div>
+            <div>
+                <input type="text" id="room" value="Room" />
+                <button id="join-room">Join</button>
+                <br />
+                <input type="text" id="message" value="message" />
+                <button id="send-message">Send</button>
+                <br />
+                <input type="text" id="room-message" value="message" />
+                <button id="send-message-to-room">Send To Rooms Only</button>
+                <br />
+                <input type="text" id="personal-message" value="message" />
+                    <button id="send-message-to-person">Send To Person</button>
+            </div>*@
+        <div class="row">
+            <h2><a href=""></a></h2>
+        </div>
+        <div>
+            <div class="row" id="messages"></div>
+            <div class="row">
+                <textarea class="col-md-10" id="personal-message" placeholder="your message..."></textarea>
+                <a class="col-md-2 btn btn-info" id="send-message-button">Send</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        @if (!@Model.Any())
+        {
+            <p>You don't have friends for send message.</p>
+        }
+        else
+        {
+            <h2>Friends:</h2>
+            <ul class="list-group chatUsersUl">
+                @Html.DisplayFor(z => z)
+            </ul>
+        }
     </div>
 </div>
-<div>
-    <input type="text" id="room" value="Room" />
-    <button id="join-room">Join</button>
-    <br />
-    <input type="text" id="message" value="message" />
-    <button id="send-message">Send</button>
-    <br />
-    <input type="text" id="room-message" value="message" />
-    <button id="send-message-to-room">Send To Rooms Only</button>
-</div>
-<div id="messages">
-</div>
+
 
 @section Scripts{
     @Scripts.Render("~/bundles/jquery")
@@ -22,8 +52,36 @@
     @Scripts.Render("~/signalr/hubs");
     <script>
         var rooms = [];
+        var userId;
+        var getAllMessages = function () {
+            $.ajax({
+                type: "POST",
+                url: '/Messages/FromUser/',
+                data: { senderId: userId },
+            }).success(function (data) {
+                $('#messages').html(data);
+                var scrollHeight = $('#messages')[0].scrollHeight;
+                $('#messages').scrollTop(scrollHeight);
+                //console.log($('#unseen-messages-' + userId).text(0));
+                $('#unseen-messages-' + userId).text(0);
+                //$('#unseen-messages-' + userId)[0].val(0);
+            }).error(function (error) {
+
+            });
+        };
 
         $(document).ready(function () {
+            $('#send-message-button').prop('disabled', true);
+
+
+            $('.chat-user').click(function () {
+                userId = $(this).data('user-id');
+                $('.chat-user').removeClass('selectedChatUser');
+                $(this).addClass('selectedChatUser');
+                $('#send-message-button').prop('disabled', false);
+                getAllMessages();
+                $('#personal-message').val('');
+            });
 
             $.connection.hub.start();
 
@@ -50,12 +108,37 @@
                 chat.server.sendMessageToRoom(msg, rooms);
             });
 
+            $('#send-message-button').click(function () {
+                var msg = $('#personal-message').val();
+                if (userId) {
+                    chat.server.sendPersonMessage(userId, msg);
+                    //console.log(userId);
+                    getAllMessages();
+                    $('#personal-message').val('');
+                } else {
+                    // TODO send alert "no user is selected"
+                }
+            });
+
+
             chat.client.addMessage = addMessage;
             chat.client.joinRoom = joinRoom;
         });
 
         function addMessage(message) {
-            $('#messages').append('<div>' + message + '</div>');
+            var newMessage = $.parseJSON(message);
+            if (newMessage.userId == userId) {
+                getAllMessages();
+            } else {
+                var notificationsCount = $('#unseen-messages-' + newMessage.userId).text();
+                if (notificationsCount) {
+                    notificationsCount = parseInt(notificationsCount);
+                    $('#unseen-messages-' + newMessage.userId).text(notificationsCount + 1);
+                }
+
+                // TODO add global notification!!!
+            }
+            //$('#messages').append('<div>' + message + '</div>');
         }
 
         function joinRoom(room) {

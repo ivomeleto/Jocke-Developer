@@ -27,6 +27,6 @@
 
         public virtual User Recepient { get; set; }
 
-
+        public bool IsSeen { get; set; }
     }
 }

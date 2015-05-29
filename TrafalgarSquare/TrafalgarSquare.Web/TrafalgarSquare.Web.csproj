@@ -213,7 +213,10 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="ViewModels\User\FreindViewModel.cs" />
+    <Compile Include="Hubs\CustomUserIdProvider.cs" />
+    <Compile Include="ViewModels\Message\MessageViewModel.cs" />
+    <Compile Include="ViewModels\User\ChatFriendViewModel.cs" />
+    <Compile Include="ViewModels\User\FriendViewModel.cs" />
     <Compile Include="ViewModels\User\TopUserViewModel.cs" />
     <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />
@@ -327,6 +330,9 @@
     <Content Include="Views\Users\TopUsers.cshtml" />
     <Content Include="Views\Users\GetFriends.cshtml" />
     <Content Include="Views\Shared\Partials\_Top10PostsPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ChatFriendViewModel.cshtml" />
+    <Content Include="Views\Messages\FromUser.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MessageViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

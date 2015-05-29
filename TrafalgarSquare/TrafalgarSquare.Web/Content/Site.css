@@ -40,9 +40,11 @@ select {
     text-transform: uppercase;
     top: 15px;
 }
+
 *::after, *::before {
     box-sizing: border-box;
 }
+
 .bs-comments {
     background-color: #fff;
     border-color: #ddd;
@@ -52,6 +54,7 @@ select {
     margin-left: 0;
     margin-right: 0;
 }
+
 .bs-comments {
     border-color: #e5e5e5 #eee #eee;
     border-style: solid;
@@ -70,47 +73,81 @@ select {
     margin-right: auto;
 }
 
-#left-menu-box{
+#left-menu-box {
     background-color: #F0F0F0;
 }
 
 .top-joke-entity-box {
     padding-top: 0.5em;
     margin-top: -0.5em;
+}
 
-}
-.top-joke-entity-box:hover{
-    background-color: #E4E4E4;
-}
+    .top-joke-entity-box:hover {
+        background-color: #E4E4E4;
+    }
 
 .image-left-small-box {
     width: 45px;
     max-height: 50px;
-
 }
 
-#random-joke-image{
+#random-joke-image {
     width: 190px;
     margin-bottom: 20px;
 }
-.jumbotron{
+
+.jumbotron {
     background-color: #FFFFFF;
 }
 
-.home-category-img{
+.home-category-img {
     width: 180px;
 }
 
-.home-categoty-box{
+.home-categoty-box {
     background-color: #F0F0F0;
     padding-top: 1.5em;
     margin-bottom: 3em;
 }
 
-#wrapper{
+#wrapper {
     margin: 4em 2em 2em 2em;
 }
 
 #user-nav-pannel {
     padding-right: 4em;
+}
+
+.displayNone {
+    display: none;
+}
+
+.displayBlock {
+    display: block;
+}
+
+#messages {
+    width: 100%;
+    height: 20em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #93c54b;
+}
+.message {
+    color: aqua;
+}
+
+.message a {
+    color: red;
+}
+.chat-user {
+    margin-top: 1em;
+}
+
+.chatUsersUl {
+    list-style-type: none;
+}
+
+.selectedChatUser {
+   background-color:  #93c54b;
 }
