@@ -10,6 +10,11 @@ namespace TrafalgarSquare.Web.Controllers
 
     public class JokesController : BaseController
     {
+        public JokesController(ITrafalgarSquareData data)
+            : base(data)
+        {
+        }
+
         [Route("jokes")]
         public ActionResult Index()
         {
@@ -36,10 +41,6 @@ namespace TrafalgarSquare.Web.Controllers
                 })
                 .ToList();
             return this.View(posts);
-        }
-
-        public JokesController(ITrafalgarSquareData data) : base(data)
-        {
-        }
+        }       
     }
 }
