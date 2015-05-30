@@ -13,7 +13,7 @@
 
     <div class="panel panel-default">
         <div class="panel-body text-muted">
-            Categorie / @ViewBag.Title <span><a href="/Categories/EditorForPosts" class="btn btn-success btn-sm">Make New Post in This Categorie</a></span>
+            Categorie / @ViewBag.Title <a href="/Categories/EditorForPosts" class="btn btn-success btn-sm"> Make New Post in This Categorie</a>
         </div>
     </div>
 
@@ -50,6 +50,17 @@
     <br>
 
     <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-bell"> Report something</span></a>
+
+    @*TODO Pop Up Window to confurm Delete*@
+
+    @if (@Model[0].CommentsCount == 0)
+    {
+        <a href="/Categories/DeletePost/@Model[0].Id" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"> Delete</span></a>
+    }
+    else
+    {
+        <a href="/Categories/DeletePost/@Model[0].Id" class="btn btn-danger disabled btn-xs"><span class="glyphicon glyphicon-trash"> Delete</span></a>
+    }
 
     <div class="post-box text-center">
         <br>

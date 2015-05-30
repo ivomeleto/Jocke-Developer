@@ -112,5 +112,12 @@ namespace TrafalgarSquare.Web.Controllers
             Data.Posts.Add(postToCreate);
             Data.Posts.SaveChanges();
         }
+
+        [Authorize]
+        public void DeletePostInCategorie(int postId)
+        {   
+            Data.Posts.DeleteById(postId);
+            Data.Posts.SaveChanges();
+        }
     }
 }

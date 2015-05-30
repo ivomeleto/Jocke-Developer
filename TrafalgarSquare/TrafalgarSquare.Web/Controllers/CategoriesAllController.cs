@@ -8,6 +8,7 @@ using TrafalgarSquare.Web.ViewModels;
 
 namespace TrafalgarSquare.Web.Controllers
 {
+    [Authorize]
     public class CategoriesAllController : BaseController
     {
         public CategoriesAllController(ITrafalgarSquareData data)
@@ -15,14 +16,24 @@ namespace TrafalgarSquare.Web.Controllers
         {
         }
 
-        [Authorize]
+        public ActionResult Index()
+        {
+            return this.View();
+        }
+
         [Route("Categories/EditorForPosts")]
         public ActionResult EditorPosts()
         {
             return this.View("CreatePostView");
         }
 
-       
+        [Route("Categories/DeletePost/{postId}")]
+        public ActionResult EditorPosts(int postId)
+        {
+            base.DeletePostInCategorie(postId);
+
+            return this.Redirect("/");
+        }
        
     }
 }
