@@ -1,0 +1,32 @@
+﻿@using System.Activities.Statements
+@using TrafalgarSquare.Web.ViewModels
+
+@model List<CommentViewModel>
+@{
+    Layout = null;
+}
+
+
+@foreach (var comment in Model)
+{
+
+     <div class="panel panel-success" >
+            <div class="panel-heading">
+                <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> @comment.User</span></stron> <em>says (on date: @comment.CreatedOn)</em></h3>
+            </div>
+            <div class="panel-body">
+               @comment.Text
+            </div>
+     </div>
+    <!-- comment box tag end -->
+
+    <ul class="pager">
+        <li class="previous disabled">
+            <a href="#">← Previous Comments</a>
+        </li>
+        <li class="next">
+            <a href="#">Next Comments →</a>
+        </li>
+    </ul>
+
+}

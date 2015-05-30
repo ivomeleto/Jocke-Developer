@@ -1,0 +1,168 @@
+﻿@model TrafalgarSquare.Web.ViewModels.User.UserProfileViewModel
+
+<div class="row">
+    <h2>@Model.Username</h2>
+    <div class="col-md-2">
+        @if (!string.IsNullOrEmpty(Model.AvatarUrl))
+        {
+            <img src="@Model.AvatarUrl" alt="avatar-@Model.Username" style="max-width: 100%" />
+        }
+        else
+        {
+            //default Avatar
+            <img src="http://gravatar.com/avatar/658f2039885a85cc03cc31e20919bed6?s=512" alt="avatar-@Model.Username" style="max-width: 100%" />
+        }
+    </div>
+    <div class="col-md-4">
+        <p>Username: @Model.Username</p>
+        <p>Email: @Model.Email</p>
+        <p>
+            City:@if (Model.City != null)
+            {
+                @Model.City
+            }
+            else
+            {
+                @:-
+            }
+        </p>
+        <p>Birthday: @Model.Birthday</p>
+        <p>
+            Age: @if (Model.Birthday != null)
+            {
+                TimeSpan ts = DateTime.Now - (DateTime)Model.Birthday;
+                DateTime Age = DateTime.MinValue.AddDays(ts.Days);
+                @: @string.Format(" {0} Years {1} Month {2} Days", Age.Year - 1, Age.Month - 1, Age.Day - 1)
+                 }
+            else
+            {
+                @:-
+                 }
+        </p>
+        <p>Gender: @Model.Gender</p>
+        <p>Register date: @string.Format("{0:dd MMMM yyyy}", Model.RegisterDate)</p>
+        <p>Posts: @Model.PostCount</p>
+        <p>Comments: @Model.CommentsCount</p>
+    </div>
+    <div class="col-md-2">
+        @if (!Model.IsOwned)
+        {
+            <div id="myFriendStatusDiv">
+                <div class="label label-success @(Model.IsViewerFriend ? "displayBlock" : "displayNone")" id="friendLabel">
+                    Friend
+                </div>
+                <div class="btn btn-sm btn-warning @(!Model.IsViewerFriend && Model.IsViewerWaitingAcceptance ? "displayBlock" : "displayNone")" id="waitingAcceptanceLabel">
+                    Waiting Acceptance
+                </div>
+                <div class="btn btn-sm btn-danger @(Model.IsViewerFriend || (!Model.IsViewerFriend && Model.IsViewerWaitingAcceptance )? "displayBlock" : "displayNone")" id="removeFriendButton">
+                    Remove Friend
+                </div>
+            </div>
+            <div class="btn btn-sm btn-info @(!Model.IsViewerFriend && !Model.IsViewerWaitingAcceptance ? "displayBlock" : "displayNone")" id="addFriendButton">
+                Add Friend
+            </div>
+        }
+    </div>
+    <div class="col-md-3" id="friendsDiv">
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function getFriends() {
+            $.ajax({
+                url: "/Users/GetFriends/@Model.Username",
+                contentType: "application/html;  chartset=utf-8",
+                type: 'GET',
+                datatype: 'html'
+            }).success(function (responseHtml) {
+                $('#friendsDiv').html(responseHtml);
+            }).error(function (error) {
+                $('#friendsDiv').html("Friends cannot be loaded!");
+            });
+        }
+
+        $(document).ready(function () {
+
+            // Add Friend
+            $("#addFriendButton").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Users/AddFriend/',
+                    data: { id: "@Model.Id" }
+                }).success(function (data) {
+                    // TODO: Display notification
+                    getFriends();
+                    jQuery.getJSON("/Users/GetFriendStatus/@Model.Username", null, function (user) {
+                        console.log(user);
+                        if (user.IsViewerFriend) {
+                            $("#myFriendStatusDiv").removeClass("displayNone");
+                            $("#myFriendStatusDiv").addClass("displayBlock");
+
+                            $("#friendLabel").removeClass("displayNone");
+                            $("#friendLabel").addClass("displayBlock");
+
+                            $("#waitingAcceptanceLabel").removeClass("displayBlock");
+                            $("#waitingAcceptanceLabel").addClass("displayNone");
+
+                            $("#removeFriendButton").removeClass("displayNone");
+                            $("#removeFriendButton").addClass("displayBlock");
+
+                            $("#addFriendButton").removeClass("displayBlock");
+                            $("#addFriendButton").addClass("displayNone");
+
+                        } else if (!user.IsViewerFriend && user.IsViewerWaitingAcceptance) {
+                            $("#myFriendStatusDiv").removeClass("displayNone");
+                            $("#myFriendStatusDiv").addClass("displayBlock");
+
+                            $("#friendLabel").removeClass("displayBlock");
+                            $("#friendLabel").addClass("displayNone");
+
+                            $("#waitingAcceptanceLabel").removeClass("displayNone");
+                            $("#waitingAcceptanceLabel").addClass("displayBlock");
+
+                            $("#removeFriendButton").removeClass("displayNone");
+                            $("#removeFriendButton").addClass("displayBlock");
+
+                            $("#addFriendButton").removeClass("displayBlock");
+                            $("#addFriendButton").addClass("displayNone");
+
+                        } else if (!user.IsViewerFriend && !user.IsViewerWaitingAcceptance) {
+                            $("#myFriendStatusDiv").removeClass("displayBlock");
+                            $("#myFriendStatusDiv").addClass("displayNone");
+
+                            $("#addFriendButton").removeClass("displayNone");
+                            $("#addFriendButton").addClass("displayBlock");
+                        }
+                    });
+                }).error(function (error) {
+                    console.log(error);
+                    // TODO: Display exception message
+                });
+            });
+
+            // Remove Friend
+            $("#removeFriendButton").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Users/RemoveFriend/',
+                    data: { id: "@Model.Id" },
+                }).success(function (data) {
+                    getFriends();
+                    $("#myFriendStatusDiv").removeClass("displayBlock");
+                    $("#myFriendStatusDiv").addClass("displayNone");
+
+                    $("#addFriendButton").removeClass("displayNone");
+                    $("#addFriendButton").addClass("displayBlock");
+                }).error(function (error) {
+
+                });
+            });
+
+            getFriends();
+        });
+
+    </script>
+}
+
