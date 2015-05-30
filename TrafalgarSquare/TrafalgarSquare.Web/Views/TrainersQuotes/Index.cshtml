@@ -1,0 +1,119 @@
+﻿@using TrafalgarSquare.Web.ViewModels;
+@model List<PostViewModel>
+@{
+    ViewBag.Title = "Trainers Quotes";
+}
+
+<div id="wrapper">
+
+    <div class="panel panel-default">
+        <div class="panel-body text-muted">
+            Categorie / @ViewBag.Title
+        </div>
+    </div>
+
+    <h1 class="text-warning">@Model[0].Title</h1>
+    <hr />
+
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="FunnyPictures#"><span class="glyphicon glyphicon-star"> Joke Likes</span> <span class="badge">@Model[0].Likes</span></a>
+            <a href="#"><span aria-hidden="true"></span><span class="glyphicon glyphicon-thumbs-up"> Like this joke</span></a>
+        </li>
+    </ul>
+
+    <br>
+    <br>
+
+    <p>@Model[0].Text</p>
+    <br />
+
+    <div>
+
+        @if (!string.IsNullOrEmpty(@Model[0].User.AvatarUrl))
+        {
+            <div class="col-md-2">
+                <img src="@Model[0].User.AvatarUrl" alt="@Model[0].User.Username" style="max-width: 30px" />
+            </div>
+        }
+        <strong>Author: </strong><a href="#">@Model[0].User.Username</a> <br />
+        <strong>Posted on: </strong><a href="#">@Model[0].CreatedDateTime</a>
+        <small>@*Is reported: @Model[i].IsReported*@</small>
+    </div>
+
+    <br>
+
+    <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-bell"> Report something</span></a>
+
+    <div class="post-box text-center">
+        <br>
+
+        @*==========LOADING PARTIAL CONTENT*@
+
+        @if (!string.IsNullOrEmpty(@Model[0].Resource.FileUrl))
+        {
+            <span>Attached file: </span>
+            <a href="@Model[0].Resource.FileUrl">download</a>
+        }
+        @if (!string.IsNullOrEmpty(@Model[0].Resource.PictureUrl))
+        {
+            <img src="@Model[0].Resource.PictureUrl" class="img-thumbnail joke-box-image" alt="@Model[0].Title" />
+        }
+        @if (!string.IsNullOrEmpty(@Model[0].Resource.VideoUrl))
+        {
+            <!-- <video controls>
+                <source src="@Model[0].Resource.VideoUrl" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video> -->
+
+            <iframe width="640" height="390" src="https://www.youtube.com/embed/2hUvgZ_djmk" frameborder="0" allowfullscreen></iframe>
+        }
+
+        <ul class="pager">
+            <li class="previous disabled">
+                <a href="#">← Previous Joke</a>
+            </li>
+            <li class="next">
+                <a href="#">Next Joke →</a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </div>
+
+
+    @*===============COMMENTS*@
+
+
+    @if (@Model[0].CommentsCount == 0)
+    {
+        <h2>Comments <span>(@Model[0].CommentsCount)</span></h2>
+
+        <a href="#" class="btn btn-success disabled">View Comments</a>
+        <a href="#" class="btn btn-default">Post New Comment</a>
+    }
+    else
+    {
+        <h2>Comments<span>(@Model[0].CommentsCount)</span></h2>
+
+
+        @Ajax.ActionLink("View Comments", "DisplayById", "Comments", new { id = @Model[0].Id },
+                new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "comment-box"
+                }, new { @class = "btn btn-success" })
+
+        <a href="#" class="btn btn-default">Post New Comment</a>
+        <br /><br />
+    }
+
+
+
+
+    <div id="comment-box">
+
+    </div>
+
+
+</div><!-- wrapper tag end -->

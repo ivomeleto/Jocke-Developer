@@ -214,6 +214,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Hubs\CustomUserIdProvider.cs" />
+    <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\Message\MessageViewModel.cs" />
     <Compile Include="ViewModels\User\ChatFriendViewModel.cs" />
     <Compile Include="ViewModels\User\FriendViewModel.cs" />
@@ -334,12 +335,12 @@
     <Content Include="Views\Messages\FromUser.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MessageViewModel.cshtml" />
     <Content Include="Views\Comments\_CommentsDetailsPartial.cshtml" />
+    <Content Include="Views\TrainersQuotes\Index.cshtml" />
+    <Content Include="Views\FunnyPictures\Index.cshtml" />
+    <Content Include="Views\FunnyCodes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FunnyCodes\" />
-    <Folder Include="Views\FunnyPictures\" />
-    <Folder Include="Views\TrainersQuotes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

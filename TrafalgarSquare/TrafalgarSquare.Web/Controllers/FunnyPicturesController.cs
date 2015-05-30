@@ -1,4 +1,7 @@
-﻿namespace TrafalgarSquare.Web.Controllers
+﻿using TrafalgarSquare.Web.ViewModels;
+using TrafalgarSquare.Web.ViewModels.User;
+
+namespace TrafalgarSquare.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -13,12 +16,34 @@
             : base(data)
         {
         }
-     
-        // GET: FunnyPictures
+
+        [Route("FunnyPictures")]
         public ActionResult Index()
         {
+            var posts = Data.Posts.All()
+                .Where(p => p.Category.Name.Equals("Funny Pictures"))
+                .OrderByDescending(p => p.CreatedDateTime)
+                .Select(p => new PostViewModel
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Text = p.Text,
+                    Resource = p.Resource,
+                    CreatedDateTime = p.CreatedDateTime,
+                    IsReported = p.IsReported ?? false,
+                    Likes = p.LikesPost.Count(),
+                    CommentsCount = p.Comments.Count(),
+                    User = new UserViewModel
+                    {
+                        Id = p.PostOwnerId,
+                        Username = p.PostOwner.UserName,
+                        AvatarUrl = p.PostOwner.AvatarUrl
+                    }
+                })
+                .Take(1)
+                .ToList();
 
-            return View("FunnyPicturesView");
+            return this.View(posts);
         }
     }
 }
