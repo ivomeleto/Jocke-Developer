@@ -101,6 +101,7 @@ namespace TrafalgarSquare.Web.Controllers
         [Authorize]
         public void BaseForAllCategoriesPostCreat(PostCreateBindModel post)
         {
+
             var currentUserId = User.Identity.GetUserId();
 
             var postToCreate = new Post

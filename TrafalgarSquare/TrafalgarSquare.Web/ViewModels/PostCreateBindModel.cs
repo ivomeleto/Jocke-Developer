@@ -14,10 +14,12 @@ namespace TrafalgarSquare.Web.ViewModels
         public string Text { get; set; }
 
         public string Resource { get; set; }
-       
+      
         public string PostOwnerId { get; set; }
 
         public int CategoryId { get; set; }
+
+        public bool isVideo { get; set; }
 
 
     }
