@@ -15,49 +15,76 @@
         }
 
         [HttpGet]
-        [Route("comments/{postId}")]
-        public ActionResult Comments(int postId)
+        [Route("Comments/DisplayById/{postId}")]
+        public ActionResult DisplayById(int? postId)
         {
+
+            if (Request.IsAjaxRequest())
+            {
+
+                var commentsFromAjax = Data.Comments.All()
+                   .Where(c => c.PostId == postId)
+                   .OrderByDescending(c => c.CreatedOn)
+                   .Select(c => new CommentViewModel
+                   {
+                       Id = c.Id,
+                       CreatedOn = c.CreatedOn,
+                       Text = c.Text,
+                       User = new UserViewModel
+                       {
+                           Id = c.UserId,
+                           Username = c.User.UserName,
+                           AvatarUrl = c.User.AvatarUrl
+                       }
+                   })
+                   .ToList();
+
+                return this.PartialView("_CommentsDetailsPartial", commentsFromAjax);
+            }
+
             var comments = Data.Comments.All()
-                .Where(c => c.PostId == postId)
-                .OrderByDescending(c => c.CreatedOn)
-                .Select(c => new CommentViewModel
-                {
-                    Id = c.Id,
-                    CreatedOn = c.CreatedOn,
-                    Text = c.Text,
-                    User = new UserViewModel
-                    {
-                        Id = c.UserId,
-                        Username = c.User.UserName,
-                        AvatarUrl = c.User.AvatarUrl
-                    }
-                })
-                .ToList();
+               .Where(c => c.PostId == postId)
+               .OrderByDescending(c => c.CreatedOn)
+               .Select(c => new CommentViewModel
+               {
+                   Id = c.Id,
+                   CreatedOn = c.CreatedOn,
+                   Text = c.Text,
+                   User = new UserViewModel
+                   {
+                       Id = c.UserId,
+                       Username = c.User.UserName,
+                       AvatarUrl = c.User.AvatarUrl
+                   }
+               })
+               .ToList();
 
             return this.View(comments);
+            
         }
 
-        public JsonResult DisplayCommentsInPost(int postId)
-        {
-            var comments = Data.Comments.All()
-                .Where(c => c.PostId == postId)
-                .OrderByDescending(c => c.CreatedOn)
-                .Select(c => new CommentViewModel
-                {
-                    Id = c.Id,
-                    CreatedOn = c.CreatedOn,
-                    Text = c.Text,
-                    User = new UserViewModel
-                    {
-                        Id = c.UserId,
-                        Username = c.User.UserName,
-                        AvatarUrl = c.User.AvatarUrl
-                    }
-                })
-                .ToList();
+         [HttpGet]
+         [Route("Comments/{postId}")]
+         public ActionResult Comments(int postId)
+         {
+             var comments = Data.Comments.All()
+                 .Where(c => c.PostId == postId)
+                 .OrderByDescending(c => c.CreatedOn)
+                 .Select(c => new CommentViewModel
+                 {
+                     Id = c.Id,
+                     CreatedOn = c.CreatedOn,
+                     Text = c.Text,
+                     User = new UserViewModel
+                     {
+                         Id = c.UserId,
+                         Username = c.User.UserName,
+                         AvatarUrl = c.User.AvatarUrl
+                     }
+                 })
+                 .ToList();
 
-            return this.Json(comments, JsonRequestBehavior.AllowGet);
-        }
+             return this.View(comments);
+         }
     }
 }

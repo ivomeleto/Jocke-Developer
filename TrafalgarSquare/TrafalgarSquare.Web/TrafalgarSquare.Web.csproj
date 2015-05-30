@@ -333,6 +333,7 @@
     <Content Include="Views\Shared\DisplayTemplates\ChatFriendViewModel.cshtml" />
     <Content Include="Views\Messages\FromUser.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MessageViewModel.cshtml" />
+    <Content Include="Views\Comments\_CommentsDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
