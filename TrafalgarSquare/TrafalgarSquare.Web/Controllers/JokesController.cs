@@ -20,10 +20,12 @@ namespace TrafalgarSquare.Web.Controllers
         [Route("jokes")]
         public ActionResult Index()
         {
+            ViewBag.Title = "Jokes";
+
             var posts = Data.Posts.All()
                 .Where(p => p.Category.Name.Equals("Jokes"))
                 .OrderByDescending(p => p.CreatedDateTime)
-                .Select(p => new JokesViewModel
+                .Select(p => new PostViewModel
                 {
                     Id = p.Id,
                     Title = p.Title,
@@ -43,7 +45,7 @@ namespace TrafalgarSquare.Web.Controllers
                 .Take(1)
                 .ToList();
 
-            return this.View(posts);
+            return this.View("AllCategoriesView", posts);
         }
 
         /* public ActionResult GetPostById(int id)

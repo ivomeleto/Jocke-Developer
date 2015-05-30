@@ -20,6 +20,8 @@ namespace TrafalgarSquare.Web.Controllers
         [Route("FunnyPictures")]
         public ActionResult Index()
         {
+            ViewBag.Title = "FunnyPictures";
+
             var posts = Data.Posts.All()
                 .Where(p => p.Category.Name.Equals("Funny Pictures"))
                 .OrderByDescending(p => p.CreatedDateTime)
@@ -43,7 +45,7 @@ namespace TrafalgarSquare.Web.Controllers
                 .Take(1)
                 .ToList();
 
-            return this.View(posts);
+            return this.View("AllCategoriesView", posts);
         }
     }
 }

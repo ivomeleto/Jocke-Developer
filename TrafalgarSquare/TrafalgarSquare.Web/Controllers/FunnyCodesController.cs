@@ -10,9 +10,16 @@ namespace TrafalgarSquare.Web.Controllers
     public class FunnyCodesController : BaseController
     {
 
+        public FunnyCodesController(ITrafalgarSquareData data)
+            : base(data)
+        {
+        }
+
         [Route("FunnyCodes")]
         public ActionResult Index()
         {
+            ViewBag.Title = "FunnyCodes";
+
             var posts = Data.Posts.All()
                 .Where(p => p.Category.Name.Equals("Funny Codes"))
                 .OrderByDescending(p => p.CreatedDateTime)
@@ -36,11 +43,9 @@ namespace TrafalgarSquare.Web.Controllers
                 .Take(1)
                 .ToList();
 
-            return this.View(posts);
+            return this.View("AllCategoriesView", posts);
         }
 
-        public FunnyCodesController(ITrafalgarSquareData data) : base(data)
-        {
-        }
+       
     }
 }

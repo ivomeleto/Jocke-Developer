@@ -13,10 +13,11 @@ namespace TrafalgarSquare.Web.Controllers
     public class TrainersQuotesController : BaseController
     {
 
-
         [Route("TrainersQuotes")]
         public ActionResult Index()
         {
+            ViewBag.Title = "TrainersQuotes";
+
             var posts = Data.Posts.All()
                 .Where(p => p.Category.Name.Equals("Trainers' Quotes"))
                 .OrderByDescending(p => p.CreatedDateTime)
@@ -40,7 +41,7 @@ namespace TrafalgarSquare.Web.Controllers
                 .Take(1)
                 .ToList();
 
-            return this.View(posts);
+            return this.View("AllCategoriesView", posts);
         }
 
         public TrainersQuotesController(ITrafalgarSquareData data)
