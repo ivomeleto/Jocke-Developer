@@ -31,9 +31,8 @@ namespace TrafalgarSquare.Web.Controllers
             return this.Redirect("/");
         }
 
-        [HttpDelete]
         [Route("Categories/DeletePost/{postId}")]
-        public ActionResult EditorPosts(int postId)
+        public ActionResult DeletePost(int postId)
         {
             base.DeletePostInCategorie(postId);
 

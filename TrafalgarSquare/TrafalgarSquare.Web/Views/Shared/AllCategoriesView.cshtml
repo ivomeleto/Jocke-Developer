@@ -55,6 +55,8 @@
 
     @*TODO Pop Up Window to confurm Delete*@
 
+    <h1>@Model[0].Id</h1>
+
     @if (@Model[0].CommentsCount == 0)
     {
         <a href="/Categories/DeletePost/@Model[0].Id" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"> Delete</span></a>
