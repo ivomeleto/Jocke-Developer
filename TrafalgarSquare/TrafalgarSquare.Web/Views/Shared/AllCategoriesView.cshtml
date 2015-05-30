@@ -3,14 +3,17 @@
 
 <div id="wrapper">
 
+    @*TODO - Постовете трябва да са по един на страница и избирането на следващ трябва да става чрез бутоните Next/Previus. Трябва да се измисли начин как да се подава Id-то за следващия/предишен пост, който юзъра иска да види*@
+
     <div class="panel panel-default">
         <div class="panel-body text-muted">
-            Categorie / @ViewBag.Title
+            Categorie / @ViewBag.Title <span><a href="#" class="btn btn-success btn-sm">Make New Post in This Categorie</a></span>
         </div>
     </div>
 
+
     <h1 class="text-warning">@Model[0].Title</h1>
-    <hr />
+    <hr/>
 
     <ul class="nav nav-pills">
         <li class="active">
@@ -23,17 +26,17 @@
     <br>
 
     <p>@Model[0].Text</p>
-    <br />
+    <br/>
 
     <div>
 
         @if (!string.IsNullOrEmpty(@Model[0].User.AvatarUrl))
         {
             <div class="col-md-2">
-                <img src="@Model[0].User.AvatarUrl" alt="@Model[0].User.Username" style="max-width: 30px" />
+                <img src="@Model[0].User.AvatarUrl" alt="@Model[0].User.Username" style="max-width: 30px"/>
             </div>
         }
-        <strong>Author: </strong><a href="#">@Model[0].User.Username</a> <br />
+        <strong>Author: </strong><a href="#">@Model[0].User.Username</a> <br/>
         <strong>Posted on: </strong><a href="#">@Model[0].CreatedDateTime</a>
         <small>@*Is reported: @Model[i].IsReported*@</small>
     </div>
@@ -54,7 +57,7 @@
         }
         @if (!string.IsNullOrEmpty(@Model[0].Resource.PictureUrl))
         {
-            <img src="@Model[0].Resource.PictureUrl" class="img-thumbnail joke-box-image" alt="@Model[0].Title" />
+            <img src="@Model[0].Resource.PictureUrl" class="img-thumbnail joke-box-image" alt="@Model[0].Title"/>
         }
         @if (!string.IsNullOrEmpty(@Model[0].Resource.VideoUrl))
         {
@@ -93,24 +96,19 @@
     {
         <h2>Comments<span>(@Model[0].CommentsCount)</span></h2>
 
-
-        @Ajax.ActionLink("View Comments", "DisplayById", "Comments", new { id = @Model[0].Id },
-                new AjaxOptions
-                {
-                    InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "comment-box"
-                }, new { @class = "btn btn-success" })
+        @Ajax.ActionLink("View Comments", "DisplayById", "Comments", new {id = @Model[0].Id},
+            new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "comment-box"
+            }, new {@class = "btn btn-success"})
 
         <a href="#" class="btn btn-default">Post New Comment</a>
-        <br /><br />
+        <br/><br/>
     }
 
+    <div id="comment-box"> </div>
 
-
-
-    <div id="comment-box">
-
-    </div>
-
+    @*TODO - Пейджинг за коментарите, тъй като може да са 5 коментара, а може и 500. Навигацията между следващи и предишни коментари става чрез Next/Preview бутоните*@
 
 </div><!-- wrapper tag end -->
