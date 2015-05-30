@@ -1,4 +1,6 @@
-﻿namespace TrafalgarSquare.Web.Controllers
+﻿using TrafalgarSquare.Web.ViewModels.User;
+
+namespace TrafalgarSquare.Web.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -53,6 +55,34 @@
                     LikesCount = x.post.LikesPost.Count,
                 }).ToList();
             return topJokes;
+        }
+
+        public IEnumerable<PostViewModel> getByCategorieNamePostViewModels(string categorieName)
+        {
+            var posts = Data.Posts.All()
+                .Where(p => p.Category.Name.Equals(categorieName))
+                .OrderByDescending(p => p.CreatedDateTime)
+                .Select(p => new PostViewModel
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Text = p.Text,
+                    Resource = p.Resource,
+                    CreatedDateTime = p.CreatedDateTime,
+                    IsReported = p.IsReported ?? false,
+                    Likes = p.LikesPost.Count(),
+                    CommentsCount = p.Comments.Count(),
+                    User = new UserViewModel
+                    {
+                        Id = p.PostOwnerId,
+                        Username = p.PostOwner.UserName,
+                        AvatarUrl = p.PostOwner.AvatarUrl
+                    }
+                })
+                .Take(1)
+                .ToList();
+
+            return posts;
         }
     }
 }

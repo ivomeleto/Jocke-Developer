@@ -20,30 +20,11 @@ namespace TrafalgarSquare.Web.Controllers
         [Route("FunnyPictures")]
         public ActionResult Index()
         {
-            ViewBag.Title = "FunnyPictures";
+            var categorieName = "Funny Pictures";
 
-            var posts = Data.Posts.All()
-                .Where(p => p.Category.Name.Equals("Funny Pictures"))
-                .OrderByDescending(p => p.CreatedDateTime)
-                .Select(p => new PostViewModel
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                    Text = p.Text,
-                    Resource = p.Resource,
-                    CreatedDateTime = p.CreatedDateTime,
-                    IsReported = p.IsReported ?? false,
-                    Likes = p.LikesPost.Count(),
-                    CommentsCount = p.Comments.Count(),
-                    User = new UserViewModel
-                    {
-                        Id = p.PostOwnerId,
-                        Username = p.PostOwner.UserName,
-                        AvatarUrl = p.PostOwner.AvatarUrl
-                    }
-                })
-                .Take(1)
-                .ToList();
+            ViewBag.Title = categorieName;
+
+            var posts = base.getByCategorieNamePostViewModels(categorieName);
 
             return this.View("AllCategoriesView", posts);
         }

@@ -12,41 +12,22 @@ namespace TrafalgarSquare.Web.Controllers
 
     public class TrainersQuotesController : BaseController
     {
-
-        [Route("TrainersQuotes")]
-        public ActionResult Index()
-        {
-            ViewBag.Title = "TrainersQuotes";
-
-            var posts = Data.Posts.All()
-                .Where(p => p.Category.Name.Equals("Trainers' Quotes"))
-                .OrderByDescending(p => p.CreatedDateTime)
-                .Select(p => new PostViewModel
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                    Text = p.Text,
-                    Resource = p.Resource,
-                    CreatedDateTime = p.CreatedDateTime,
-                    IsReported = p.IsReported ?? false,
-                    Likes = p.LikesPost.Count(),
-                    CommentsCount = p.Comments.Count(),
-                    User = new UserViewModel
-                    {
-                        Id = p.PostOwnerId,
-                        Username = p.PostOwner.UserName,
-                        AvatarUrl = p.PostOwner.AvatarUrl
-                    }
-                })
-                .Take(1)
-                .ToList();
-
-            return this.View("AllCategoriesView", posts);
-        }
-
         public TrainersQuotesController(ITrafalgarSquareData data)
             : base(data)
         {
         }
+
+        [Route("TrainersQuotes")]
+        public ActionResult Index()
+        {
+            var categorieName = "Trainers' Quotes";
+
+            ViewBag.Title = categorieName;
+
+            var posts = base.getByCategorieNamePostViewModels(categorieName);
+
+            return this.View("AllCategoriesView", posts);
+        }
+        
     }
 }
