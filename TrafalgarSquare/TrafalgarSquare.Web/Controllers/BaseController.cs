@@ -110,11 +110,11 @@ namespace TrafalgarSquare.Web.Controllers
 
                 Resource = new PostResources()
                 {
-                    PictureUrl = post.Resource
+                    VideoUrl = post.Resource
                 },
 
                 PostOwnerId = currentUserId,
-                CreatedDateTime = DateTime.Now.AddHours(-17),
+                CreatedDateTime = DateTime.Now,
                 CategoryId = post.CategoryId
 
             };

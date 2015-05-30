@@ -55,8 +55,6 @@
 
     @*TODO Pop Up Window to confurm Delete*@
 
-    <h1>@Model[0].Id</h1>
-
     @if (@Model[0].CommentsCount == 0)
     {
         <a href="/Categories/DeletePost/@Model[0].Id" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"> Delete</span></a>
@@ -85,9 +83,10 @@
             <!-- <video controls>
                 <source src="@Model[0].Resource.VideoUrl" type="video/mp4">
                 Your browser does not support HTML5 video.
+                https://www.youtube.com/embed/2hUvgZ_djmk
             </video> -->
 
-            <iframe width="640" height="390" src="https://www.youtube.com/embed/2hUvgZ_djmk" frameborder="0" allowfullscreen></iframe>
+            <iframe width="640" height="390" src="@Model[0].Resource.VideoUrl" frameborder="0" allowfullscreen></iframe>
         }
 
         <ul class="pager">
