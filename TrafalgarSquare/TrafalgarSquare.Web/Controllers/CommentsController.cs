@@ -18,10 +18,8 @@
         [Route("Comments/DisplayById/{postId}")]
         public ActionResult DisplayById(int? postId)
         {
-
             if (Request.IsAjaxRequest())
             {
-
                 var commentsFromAjax = Data.Comments.All()
                    .Where(c => c.PostId == postId)
                    .OrderByDescending(c => c.CreatedOn)
@@ -59,9 +57,10 @@
                })
                .ToList();
 
-            return this.View(comments);
-            
+            return this.View(comments);         
         }
+
+
 
          [HttpGet]
          [Route("Comments/{postId}")]

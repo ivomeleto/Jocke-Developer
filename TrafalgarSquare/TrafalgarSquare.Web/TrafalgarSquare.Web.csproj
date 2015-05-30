@@ -210,10 +210,12 @@
     <Compile Include="Automapper\IHaveCustomMappings.cs" />
     <Compile Include="Automapper\IMapFrom.cs" />
     <Compile Include="Automapper\MapInitializer.cs" />
+    <Compile Include="Controllers\CategoriesAllController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Hubs\CustomUserIdProvider.cs" />
+    <Compile Include="ViewModels\PostCreateBindModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\Message\MessageViewModel.cs" />
     <Compile Include="ViewModels\User\ChatFriendViewModel.cs" />
@@ -335,9 +337,11 @@
     <Content Include="Views\Shared\DisplayTemplates\MessageViewModel.cshtml" />
     <Content Include="Views\Comments\_CommentsDetailsPartial.cshtml" />
     <Content Include="Views\Shared\AllCategoriesView.cshtml" />
+    <Content Include="Views\Shared\CreatePostView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CategoriesAll\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -19,15 +19,23 @@ namespace TrafalgarSquare.Web.Controllers
         public ActionResult Index()
         {
             var categorieName = "Funny Codes";
-
             ViewBag.Title = categorieName;
+
+            // TODO Да се взима Idто на категорията по културен начин
+            ViewBag.CategorieId = 4;
 
             var posts = base.getByCategorieNamePostViewModels(categorieName);
 
             return this.View("AllCategoriesView", posts);
         }
-        
 
+        [HttpPost]
+        public ActionResult PostCreate(PostCreateBindModel post)
+        {
+            base.BaseForAllCategoriesPostCreat(post);
+
+            return this.RedirectToAction("Index");
+        }
        
     }
 }

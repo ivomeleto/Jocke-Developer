@@ -118,7 +118,57 @@ namespace TrafalgarSquare.Data.Migrations
                 {
                     PostId = firstUserPost2.Id,
                     Post = firstUserPost2,
-                    Text = "Hello, First user comment from himself.",
+                    Text = "1111 Hello, First user comment from himself.",
+                    UserId = firstUser.Id,
+                    User = firstUser,
+                    CreatedOn = DateTime.Now.AddHours(1),
+                });
+
+                firstUserPost2.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost2.Id,
+                    Post = firstUserPost2,
+                    Text = "22222 Hello, First user comment from himself.",
+                    UserId = firstUser.Id,
+                    User = firstUser,
+                    CreatedOn = DateTime.Now.AddHours(1),
+                });
+
+                firstUserPost2.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost2.Id,
+                    Post = firstUserPost2,
+                    Text = "333333 Hello, First user comment from himself.",
+                    UserId = firstUser.Id,
+                    User = firstUser,
+                    CreatedOn = DateTime.Now.AddHours(1),
+                });
+
+                firstUserPost2.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost2.Id,
+                    Post = firstUserPost2,
+                    Text = "44444 Hello, First user comment from himself.",
+                    UserId = firstUser.Id,
+                    User = firstUser,
+                    CreatedOn = DateTime.Now.AddHours(1),
+                });
+
+                firstUserPost2.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost2.Id,
+                    Post = firstUserPost2,
+                    Text = "5555 Hello, First user comment from himself.",
+                    UserId = firstUser.Id,
+                    User = firstUser,
+                    CreatedOn = DateTime.Now.AddHours(1),
+                });
+
+                firstUserPost2.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost2.Id,
+                    Post = firstUserPost2,
+                    Text = "666666 Hello, First user comment from himself.",
                     UserId = firstUser.Id,
                     User = firstUser,
                     CreatedOn = DateTime.Now.AddHours(1),
@@ -188,6 +238,37 @@ namespace TrafalgarSquare.Data.Migrations
                     Text = "Hello, First user comment from second user.",
                     UserId = secondUser.Id,
                     User = secondUser,
+                    CreatedOn = DateTime.Now,
+                });
+
+                firstUserPost1.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost1.Id,
+                    Post = firstUserPost1,
+                    Text = "22 Hello, First user comment from second user.222",
+                    UserId = firstUser.Id,
+                    User = firstUser,
+                    CreatedOn = DateTime.Now,
+                });
+
+                firstUserPost1.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost1.Id,
+                    Post = firstUserPost1,
+                    Text = "333 Hello, First user comment from second user.33333",
+                    UserId = secondUser.Id,
+                    User = secondUser,
+                    CreatedOn = DateTime.Now,
+                });
+
+
+                firstUserPost1.Comments.Add(new Comment()
+                {
+                    PostId = firstUserPost1.Id,
+                    Post = firstUserPost1,
+                    Text = "444 Hello, First user comment from second user.444",
+                    UserId = firstUser.Id,
+                    User = firstUser,
                     CreatedOn = DateTime.Now,
                 });
 

@@ -1,4 +1,7 @@
-﻿using TrafalgarSquare.Web.ViewModels.User;
+﻿using System;
+using Microsoft.AspNet.Identity;
+using TrafalgarSquare.Models;
+using TrafalgarSquare.Web.ViewModels.User;
 
 namespace TrafalgarSquare.Web.Controllers
 {
@@ -83,6 +86,31 @@ namespace TrafalgarSquare.Web.Controllers
                 .ToList();
 
             return posts;
+        }
+
+        [Authorize]
+        public void BaseForAllCategoriesPostCreat(PostCreateBindModel post)
+        {
+            var currentUserId = User.Identity.GetUserId();
+
+            var postToCreate = new Post
+            {
+                Text = post.Text,
+                Title = post.Title,
+
+                Resource = new PostResources()
+                {
+                    PictureUrl = post.Resource
+                },
+
+                PostOwnerId = currentUserId,
+                CreatedDateTime = DateTime.Now.AddHours(-17),
+                CategoryId = post.CategoryId
+
+            };
+
+            Data.Posts.Add(postToCreate);
+            Data.Posts.SaveChanges();
         }
     }
 }

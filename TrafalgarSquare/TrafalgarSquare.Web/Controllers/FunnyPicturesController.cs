@@ -1,4 +1,5 @@
-﻿using TrafalgarSquare.Web.ViewModels;
+﻿using TrafalgarSquare.Models;
+using TrafalgarSquare.Web.ViewModels;
 using TrafalgarSquare.Web.ViewModels.User;
 
 namespace TrafalgarSquare.Web.Controllers
@@ -24,9 +25,21 @@ namespace TrafalgarSquare.Web.Controllers
 
             ViewBag.Title = categorieName;
 
+            // TODO Да се взима Idто на категорията по културен начин
+            ViewBag.CategorieId = 2;
+
+
             var posts = base.getByCategorieNamePostViewModels(categorieName);
 
             return this.View("AllCategoriesView", posts);
+        }
+
+        [HttpPost]
+        public ActionResult PostCreate(PostCreateBindModel post)
+        {
+            base.BaseForAllCategoriesPostCreat(post);
+
+            return this.RedirectToAction("Index");
         }
     }
 }

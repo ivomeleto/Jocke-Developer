@@ -1,5 +1,11 @@
 ﻿@using TrafalgarSquare.Web.ViewModels;
 @model List<PostViewModel>
+           @{
+              //TODO По културно да се взима на категорията IDто
+               TempData["CategoryId"] = ViewBag.CategorieId;
+
+               TempData["categorieName"] = @ViewBag.Title;
+           }
 
 <div id="wrapper">
 
@@ -7,7 +13,7 @@
 
     <div class="panel panel-default">
         <div class="panel-body text-muted">
-            Categorie / @ViewBag.Title <span><a href="#" class="btn btn-success btn-sm">Make New Post in This Categorie</a></span>
+            Categorie / @ViewBag.Title <span><a href="/Categories/EditorForPosts" class="btn btn-success btn-sm">Make New Post in This Categorie</a></span>
         </div>
     </div>
 
@@ -112,3 +118,46 @@
     @*TODO - Пейджинг за коментарите, тъй като може да са 5 коментара, а може и 500. Навигацията между следващи и предишни коментари става чрез Next/Preview бутоните*@
 
 </div><!-- wrapper tag end -->
+
+@*@section scripts{
+    <script>
+        function loadComments(itemId) {
+            $.get("comments/" + itemId)
+                .done(function(data) {
+                    $(".comments-container-" + itemId + " .comments-container").html(data);
+                    $(".comments-container-" + itemId).slideDown("fast");
+                });
+        }
+
+
+        $("#jokes-container").on("click", function (ev) {
+            var target = $(ev.target);
+            var postControls = target.parent(".post-controls");
+            var itemId = postControls.data("item-id");
+
+            if (target.is(".show-comments-btn")) {
+                loadComments(itemId);
+                $(ev.target).hide();
+                postControls.children(".hide-comments-btn").show();
+            }
+            else if (target.is(".hide-comments-btn")) {
+                $(".comments-container-" + itemId).slideUp("fast");
+                $(ev.target).hide();
+                postControls.children(".show-comments-btn").show();
+            }
+        });
+
+        $(".add-comment-form").on("submit",
+            function (ev) {
+            ev.preventDefault();
+
+            var itemId = $(ev.target).data("item-id");
+            var formData = $(this).serialize();
+
+                $.post("comments/add/", formData)
+                    .done(function() {
+                        loadComments(itemId);
+                    });
+            });
+    </script>
+}*@
