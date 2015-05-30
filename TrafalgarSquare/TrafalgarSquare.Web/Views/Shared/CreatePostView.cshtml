@@ -7,12 +7,11 @@
 
     <h2>Create post in @ViewBag.Title</h2>
 
-    @using (Html.BeginForm("PostCreate", "FunnyPictures", FormMethod.Post))
+    @using (Html.BeginForm("PostCreate", "Categories", FormMethod.Post))
     {
 @*
         @Html.AntiForgeryToken()
 *@
-
 
         <div>
             @Html.Label("Title")
@@ -24,21 +23,14 @@
             @Html.TextBox("Text")
         </div>
 
-
         <div>
             @Html.Label("Resource")
             @Html.TextBox("Resource")
         </div>
 
-     @*   <div>
-            <input id="PostOwnerId" type="hidden" value=@TempData["PostOwnerId"] name="PostOwnerId">
-        </div>*@
-
         <div>
             <input id="CategoryId" type="hidden" value=@TempData["CategoryId"] name="CategoryId">
         </div>
-
-
 
         <input type="submit"/>
     }

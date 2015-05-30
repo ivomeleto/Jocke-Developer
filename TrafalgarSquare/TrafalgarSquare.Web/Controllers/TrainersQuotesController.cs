@@ -17,27 +17,33 @@ namespace TrafalgarSquare.Web.Controllers
         {
         }
 
-        [Route("TrainersQuotes")]
-        public ActionResult Index()
+        [Route("TrainersQuotes/{PageFromUrl}")]
+        public ActionResult Index(int? PageFromUrl)
         {
+
+            var Page = PageFromUrl == null ? 1 : PageFromUrl;  Page = PageFromUrl;
+
+            if (Page <= 0)
+            {
+                Page = 1;
+            }
+
             var categorieName = "Trainers' Quotes";
+            
             ViewBag.Title = categorieName;
+            ViewBag.CategorieNameWithOutSpaces = "TrainersQuotes";
 
             // TODO Да се взима Idто на категорията по културен начин
             ViewBag.CategorieId = 1;
-        
-            var posts = base.getByCategorieNamePostViewModels(categorieName);
+            var PageSize = 1;
+            ViewBag.PagePrevious = Page - 1;
+            ViewBag.PageNext = Page + 1;
+
+            var posts = base.getPostViewModelByCategorieNamePageAndPageSize(categorieName, (int)Page, PageSize);
 
             return this.View("AllCategoriesView", posts);
         }
 
-        [HttpPost]
-        public ActionResult PostCreate(PostCreateBindModel post)
-        {
-            base.BaseForAllCategoriesPostCreat(post);
-
-            return this.RedirectToAction("Index");
-        }
         
     }
 }

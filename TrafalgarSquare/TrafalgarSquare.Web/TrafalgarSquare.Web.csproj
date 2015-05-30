@@ -210,7 +210,7 @@
     <Compile Include="Automapper\IHaveCustomMappings.cs" />
     <Compile Include="Automapper\IMapFrom.cs" />
     <Compile Include="Automapper\MapInitializer.cs" />
-    <Compile Include="Controllers\CategoriesAllController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -341,7 +341,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CategoriesAll\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

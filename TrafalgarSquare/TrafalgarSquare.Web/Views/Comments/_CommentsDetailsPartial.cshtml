@@ -12,21 +12,29 @@
 
      <div class="panel panel-success" >
             <div class="panel-heading">
-                <h3 class="panel-title"><stron><span class="glyphicon glyphicon-user"> @comment.User</span></stron> <em>says (on date: @comment.CreatedOn)</em></h3>
+                <h3 class="panel-title"><stron class="lead"><span class="glyphicon glyphicon-user"> @comment.User.Username says</span></stron><em>(on date: @comment.CreatedOn)</em>
+
+                    <a href="#" class="pull-right"><span class="glyphicon glyphicon-pencil"></span> edit </a>
+
+                    <a href="#" class="pull-right"><span class="glyphicon glyphicon-trash"></span> delete </a>
+       
+                </h3>
+
             </div>
             <div class="panel-body">
                @comment.Text
             </div>
      </div>
-    <!-- comment box tag end -->
-
-    <ul class="pager">
-        <li class="previous disabled">
-            <a href="#">← Previous Comments</a>
-        </li>
-        <li class="next">
-            <a href="#">Next Comments →</a>
-        </li>
-    </ul>
+    <!-- comment box tag end --> 
 
 }
+
+@*TODO Comments Paging*@
+<ul class="pager">
+    <li class="previous disabled">
+        <a href="#">← Previous Comments</a>
+    </li>
+    <li class="next">
+        <a href="#">Next Comments →</a>
+    </li>
+</ul>

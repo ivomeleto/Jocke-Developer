@@ -1,11 +1,11 @@
 ﻿@using TrafalgarSquare.Web.ViewModels;
 @model List<PostViewModel>
-           @{
-              //TODO По културно да се взима на категорията IDто
-               TempData["CategoryId"] = ViewBag.CategorieId;
-
-               TempData["categorieName"] = @ViewBag.Title;
-           }
+   @{
+        //TODO По културно да се взима на категорията IDто
+        TempData["CategoryId"] = ViewBag.CategorieId;
+        TempData["CategorieNameWithOutSpaces"] = ViewBag.CategorieNameWithOutSpaces;
+        TempData["categorieName"] = ViewBag.Title;
+   }
 
 <div id="wrapper">
 
@@ -50,6 +50,8 @@
     <br>
 
     <a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-bell"> Report something</span></a>
+    <a href="#" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"> Edit</span></a>
+
 
     @*TODO Pop Up Window to confurm Delete*@
 
@@ -87,15 +89,24 @@
         }
 
         <ul class="pager">
-            <li class="previous disabled">
-                <a href="#">← Previous Joke</a>
-            </li>
+            @if (ViewBag.PagePrevious == 0)
+            {
+                <li class="previous disabled">
+                    <a href="/@ViewBag.CategorieNameWithOutSpaces/@ViewBag.PagePrevious">← Previous Joke</a>
+                </li>
+            }
+            else
+            {
+                <li class="previous">
+                    <a href="/@ViewBag.CategorieNameWithOutSpaces/@ViewBag.PagePrevious">← Previous Joke</a>
+                </li>
+            }
             <li class="next">
-                <a href="#">Next Joke →</a>
+                <a href="/@ViewBag.CategorieNameWithOutSpaces/@ViewBag.PageNext">Next Joke →</a>
             </li>
         </ul>
-        <br>
-        <br>
+
+        <br/><br/>
     </div>
 
 

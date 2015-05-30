@@ -16,7 +16,7 @@
 
         [HttpGet]
         [Route("Comments/DisplayById/{postId}")]
-        public ActionResult DisplayById(int? postId)
+        public ActionResult DisplayById(int postId)
         {
             if (Request.IsAjaxRequest())
             {
@@ -35,6 +35,8 @@
                            AvatarUrl = c.User.AvatarUrl
                        }
                    })
+/*                   .Skip((2 - 1) * 2)
+                   .Take(2)*/
                    .ToList();
 
                 return this.PartialView("_CommentsDetailsPartial", commentsFromAjax);
@@ -55,10 +57,13 @@
                        AvatarUrl = c.User.AvatarUrl
                    }
                })
+               .Take(2)
                .ToList();
 
             return this.View(comments);         
         }
+
+       
 
 
 

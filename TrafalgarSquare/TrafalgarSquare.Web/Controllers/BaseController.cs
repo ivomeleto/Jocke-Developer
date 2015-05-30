@@ -60,8 +60,17 @@ namespace TrafalgarSquare.Web.Controllers
             return topJokes;
         }
 
-        public IEnumerable<PostViewModel> getByCategorieNamePostViewModels(string categorieName)
+        public IEnumerable<PostViewModel> getPostViewModelByCategorieNamePageAndPageSize(string categorieName, int Page, int PageSize)
         {
+
+            var getPageFromDb = ((Page - 1) * PageSize);
+
+            if (getPageFromDb < 0)
+            {
+                getPageFromDb = 1;
+            }
+
+            //TODO Когато заявката иска Пост, който е извън колекцията, да се хвърля правилна грешка, иначе гърми
             var posts = Data.Posts.All()
                 .Where(p => p.Category.Name.Equals(categorieName))
                 .OrderByDescending(p => p.CreatedDateTime)
@@ -82,7 +91,8 @@ namespace TrafalgarSquare.Web.Controllers
                         AvatarUrl = p.PostOwner.AvatarUrl
                     }
                 })
-                .Take(1)
+                .Skip(getPageFromDb)
+                .Take(PageSize)
                 .ToList();
 
             return posts;
