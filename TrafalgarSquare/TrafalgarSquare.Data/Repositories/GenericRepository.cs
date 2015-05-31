@@ -85,10 +85,17 @@
                 this.Delete(entity);
             }
         }
+        public void UpdateById(string id, T item)
+        {
+            var entity = this.GetById(id);
+            SaveChanges();
+        }
 
         public void SaveChanges()
         {
             this.Context.SaveChanges();
         }
+
+
     }
 }

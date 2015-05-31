@@ -338,6 +338,7 @@
     <Content Include="Views\Comments\_CommentsDetailsPartial.cshtml" />
     <Content Include="Views\Shared\AllCategoriesView.cshtml" />
     <Content Include="Views\Shared\CreatePostView.cshtml" />
+    <None Include="Views\Manage\ChangeAvatar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

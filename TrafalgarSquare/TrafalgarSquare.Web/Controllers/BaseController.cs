@@ -10,14 +10,26 @@ namespace TrafalgarSquare.Web.Controllers
     using System.Web.Mvc;
     using Data;
     using ViewModels;
+    using System.Web.Routing;
 
     public abstract class BaseController : Controller
     {
         private ITrafalgarSquareData data;
+        private User userProfile;  
 
+        protected BaseController()
+        {
+
+        }
         protected BaseController(ITrafalgarSquareData data)
         {
             this.Data = data;
+        }
+
+        protected BaseController(ITrafalgarSquareData data, User userProfile)
+            :this(data)
+        {
+            this.UserProfile = userProfile;
         }
 
         protected ITrafalgarSquareData Data
@@ -25,6 +37,7 @@ namespace TrafalgarSquare.Web.Controllers
             get { return this.data; }
             private set { this.data = value; }
         }
+        protected User UserProfile { get; private set; }
 
         protected IEnumerable<TopPostViewModel> Top10Jokes()
         {
@@ -122,6 +135,23 @@ namespace TrafalgarSquare.Web.Controllers
 
             Data.Posts.Add(postToCreate);
             Data.Posts.SaveChanges();
+        }
+
+        protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        {
+
+            if (requestContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                var userName = requestContext.HttpContext.User.Identity.Name;
+                var user = this.Data.Users.All().FirstOrDefault(x => x.UserName == userName);
+                this.UserProfile = user;
+            }
+            if (this.UserProfile == null)
+            {
+                //throw new InstanceNotFoundException("shit");
+                return base.BeginExecute(requestContext, callback, state);
+            }
+            return base.BeginExecute(requestContext, callback, state);
         }
 
         [Authorize]

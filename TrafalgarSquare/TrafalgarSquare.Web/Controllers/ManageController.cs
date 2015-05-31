@@ -6,17 +6,21 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using TrafalgarSquare.Data;
 using TrafalgarSquare.Web.ViewModels;
+using TrafalgarSquare.Models;
+using TrafalgarSquare.Web.ViewModels.User;
 
 namespace TrafalgarSquare.Web.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+        public ManageController(ITrafalgarSquareData data)
+            :base(data)
         {
         }
 
@@ -49,6 +53,26 @@ namespace TrafalgarSquare.Web.Controllers
                 _userManager = value;
             }
         }
+
+
+        public ActionResult ChangeAvatar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeAvatar([Bind(Include = "AvatarUrl")] User model)
+        {
+            var userId = User.Identity.GetUserId();
+            var currentUser = this.Data.Users.All().FirstOrDefault(x => x.Id == userId);
+            currentUser.AvatarUrl = model.AvatarUrl;
+            this.Data.Users.UpdateById(currentUser.Id, currentUser);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
 
         //
         // GET: /Manage/Index
