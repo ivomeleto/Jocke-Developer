@@ -1,0 +1,14 @@
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\TrafalgarSquare.Models.dll.config
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\TrafalgarSquare.Models.dll
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\TrafalgarSquare.Models.pdb
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\EntityFramework.dll
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\EntityFramework.xml
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\obj\Debug\TrafalgarSquare.Models.csprojResolveAssemblyReference.cache
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\obj\Debug\TrafalgarSquare.Models.dll
+C:\Users\iivel_000.COMMANDCENTER\Desktop\Jocke-Developer-master\Jocke-Developer-master\TrafalgarSquare\TrafalgarSquare.Models\obj\Debug\TrafalgarSquare.Models.pdb

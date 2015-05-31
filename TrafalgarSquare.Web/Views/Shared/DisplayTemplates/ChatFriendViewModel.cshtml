@@ -1,0 +1,27 @@
+﻿@model TrafalgarSquare.Web.ViewModels.User.ChatFriendViewModel
+<li class="row top-joke-entity-box chat-user" data-user-id="@Model.Id">
+    <div class="col-md-3">
+        <img class="image-left-small-box" src="@Model.AvatarUrl" alt="">
+        <span class="label  @(Model.IsAcceptedFriendShip ? "label-success" : "label-danger")">
+            @if (Model.IsAcceptedFriendShip)
+            {
+                @: Friend
+            }
+            else
+            {
+                @: waiting acceptance
+            }
+        </span>
+    </div>
+
+    <div class="col-md-6">
+        @Model.Username
+    </div>
+
+    <div class="col-md-1">
+        @if (Model.IsAcceptedFriendShip)
+        {
+            <span class="badge"><span id="unseen-messages-@Model.Id">@Model.UnSeenMessageCount</span> <small class="glyphicon glyphicon-bell"></small></span>
+        }
+    </div>
+</li>

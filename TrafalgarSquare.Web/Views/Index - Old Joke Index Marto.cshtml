@@ -1,0 +1,129 @@
+﻿@using TrafalgarSquare.Web.ViewModels;
+@model List<JokesViewModel>
+@{
+    ViewBag.Title = "Jokes";
+}
+
+<h2>Jokes</h2>
+<div id="jokes-container">
+    @foreach (var joke in Model)
+    {
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title" id="panel-title">
+                    @joke.Title<a href="#panel-title" class="anchorjs-link"><span class="anchorjs-icon"></span></a>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="text-center">
+                    <h4>@joke.Text</h4>
+                    @if (!string.IsNullOrEmpty(joke.Resource.FileUrl))
+                    {
+                        <span>Attached file: </span>
+                        <a href="@joke.Resource.FileUrl">download</a>
+                    }
+                    @if (!string.IsNullOrEmpty(joke.Resource.PictureUrl))
+                    {
+                        <img src="@joke.Resource.PictureUrl" alt="@joke.Title" style="max-width: 100%" />
+                    }
+                    @if (!string.IsNullOrEmpty(joke.Resource.VideoUrl))
+                    {
+                        <video controls>
+                            <source src="@joke.Resource.VideoUrl" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+
+                    }
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    @if (!string.IsNullOrEmpty(joke.User.AvatarUrl))
+                    {
+                        <div class="col-md-2">
+                            <img src="@joke.User.AvatarUrl" alt="@joke.User.Username" />
+                        </div>
+                    }
+                    <div class="col-md-3">
+                        <div>Date: @joke.CreatedDateTime </div>
+                        <div>User: @joke.User.Username</div>
+                        <div>Likes: @joke.Likes</div>
+                        <div>Comments: @joke.CommentsCount</div>
+                        <div>@*Is reported: @joke.IsReported*@</div>
+                    </div>
+                    <div class="col-md-7 text-right post-controls" data-item-id="@joke.Id">
+                        <div class="btn btn-sm btn-info">
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                            Like
+                        </div>
+                        <div class="btn btn-sm btn-info show-comments-btn">
+                            Show comments
+                        </div>
+                        <div class="btn btn-sm btn-info hide-comments-btn" style="display: none">
+                            Hide comments
+                        </div>
+                        <div class="btn btn-sm btn-danger">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Report post
+
+                        </div>
+                    </div>
+
+                    <div class="comments-container-@joke.Id col-xs-12" style="display: none">
+                        <div class="comments-container"></div>
+                        <form class="add-comment-form">
+                            <textarea class="form-control" name="text"></textarea>
+                            <input type="hidden" value="@joke.Id" name="postId"/>
+
+                            <button class="btn btn-info btn-small submit-comment">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        function loadComments(itemId) {
+            $.get("comments/" + itemId)
+                .done(function(data) {
+                    $(".comments-container-" + itemId + " .comments-container").html(data);
+                    $(".comments-container-" + itemId).slideDown("fast");
+                });
+        }
+
+
+        $("#jokes-container").on("click", function (ev) {
+            var target = $(ev.target);
+            var postControls = target.parent(".post-controls");
+            var itemId = postControls.data("item-id");
+
+            if (target.is(".show-comments-btn")) {
+                loadComments(itemId);
+                $(ev.target).hide();
+                postControls.children(".hide-comments-btn").show();
+            }
+            else if (target.is(".hide-comments-btn")) {
+                $(".comments-container-" + itemId).slideUp("fast");
+                $(ev.target).hide();
+                postControls.children(".show-comments-btn").show();
+            }
+        });
+
+        $(".add-comment-form").on("submit",
+            function (ev) {
+            ev.preventDefault();
+
+            var itemId = $(ev.target).data("item-id");
+            var formData = $(this).serialize();
+
+                $.post("comments/add/", formData)
+                    .done(function() {
+                        loadComments(itemId);
+                    });
+            });
+    </script>
+
+}

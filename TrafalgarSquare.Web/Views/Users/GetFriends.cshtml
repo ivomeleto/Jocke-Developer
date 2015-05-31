@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TrafalgarSquare.Web.ViewModels.User.FriendViewModel>
+<h3>Friends:</h3>
+<table>
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Username</th>
+            <th>Friend Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var friend in Model)
+            {
+                <tr>
+                    <td>@(friend.Number+1)</td>
+                    <td>
+                        <img src="@friend.AvatarUrl" alt="avatar-@friend.Username" />
+                        <a href="/User/Profile/@friend.Username">@friend.Username</a>
+                    </td>
+                    <td>
+                        @if (friend.IsAcceptedFriendShip)
+                        {
+                            <span>Accepted</span>
+                        }
+                        else
+                        {
+                            <span>Waiting accpetance</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
