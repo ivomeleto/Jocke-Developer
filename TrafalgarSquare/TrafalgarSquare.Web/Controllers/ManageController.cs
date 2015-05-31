@@ -64,15 +64,28 @@ namespace TrafalgarSquare.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangeAvatar([Bind(Include = "AvatarUrl")] User model)
         {
-            var userId = User.Identity.GetUserId();
-            var currentUser = this.Data.Users.All().FirstOrDefault(x => x.Id == userId);
-            currentUser.AvatarUrl = model.AvatarUrl;
-            this.Data.Users.UpdateById(currentUser.Id, currentUser);
+            var user = this.UserProfile;
+            user.AvatarUrl = model.AvatarUrl;
+            this.Data.Users.UpdateById(user.Id, user);
 
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult ChangeEmail()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeEmail([Bind(Include = "Email")] UserViewModel model)
+        {
+            var user = this.UserProfile;
+            user.Email = model.Email;
+            this.Data.Users.UpdateById(user.Id, user);
+
+            return RedirectToAction("Index", "Home");
+        }
 
         //
         // GET: /Manage/Index
