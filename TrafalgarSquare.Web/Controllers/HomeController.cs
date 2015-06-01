@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Data;
     using ViewModels;
+    using System.Threading;
 
     public class HomeController : BaseController
     {
@@ -70,6 +71,20 @@
         public ActionResult PartialTop10Jokes()
         {
             return this.PartialView("Partials/_Top10PostsPartial", this.Top10Jokes());
+        }
+
+        public ActionResult IsNameTaken(string username)
+        {
+            Thread.Sleep(1000);
+            var users = this.Data.Users.All().Where(x => x.UserName == username);
+            if (!users.Any())
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
         }
     }
 }
